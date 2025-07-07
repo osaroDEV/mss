@@ -3,18 +3,34 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Menu, X, Phone, Mail } from 'lucide-react';
-import Image from 'next/image';
+import { getSiteSettings, type SiteSettings } from '@/lib/sanity'
 
-export default function Header() {
+interface HeaderProps {
+  siteSettings?: SiteSettings | null
+}
+
+export default function Header({ siteSettings }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const navigation = [
+  // Fallback navigation if no siteSettings
+  const fallbackNavigation = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
     { name: 'Team', href: '/team' },
     { name: 'Contact', href: '/contact' },
-  ];
+  ]
+
+  // Use siteSettings navigation or fallback
+  const navigation = siteSettings?.navigation?.map(item => ({
+    name: item.title,
+    href: item.url,
+    external: item.external
+  })) || fallbackNavigation.map(item => ({
+    name: item.name,
+    href: item.href,
+    external: false
+  }))
 
   return (
     <header className='bg-white shadow-sm border-b border-neutral-200'>
@@ -25,11 +41,17 @@ export default function Header() {
             <div className='w-full flex items-center justify-between'>
               <div className='flex items-center'>
                 <Phone className='h-4 w-4 mr-2' />
-                <span className='text-[10px] md:text-base'>+44 (0) 20 7123 4567</span>
+                <a
+                  href='tel:+442071234567'
+                  className='text-[10px] md:text-base'
+                >{siteSettings?.contactInfo?.phone || '+44 (0) 20 7123 4567'}</a>
               </div>
               <div className='flex items-center'>
                 <Mail className='h-4 w-4 mr-2' />
-                <span className='text-[10px] md:text-base'>info@michaelstevenssolicitors.co.uk</span>
+                <a
+                  href='mailto:info@michaelstevenssolicitors.co.uk'
+                  className='text-[10px] md:text-base'
+                >{siteSettings?.contactInfo?.email || 'info@michaelstevenssolicitors.co.uk'}</a>
               </div>
             </div>
             {/* <div className='hidden md:block'>
@@ -56,10 +78,12 @@ export default function Header() {
 
           {/* Desktop navigation */}
           <div className='hidden md:flex items-center justify-center space-x-8'>
-            {navigation.map((item) => (
+            {navigation.map((item, index) => (
               <Link
-                key={item.name}
+                key={`${item.name}-${index}`}
                 href={item.href}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
                 className='text-neutral-700 hover:text-primary-800 px-3 py-2 text-sm font-medium transition-colors duration-200'
               >
                 {item.name}
@@ -104,10 +128,12 @@ export default function Header() {
         >
           <div className='md:hidden border-t border-neutral-200'>
             <div className='px-2 pt-2 pb-3 space-y-1 bg-white'>
-              {navigation.map((item) => (
+              {navigation.map((item, index) => (
                 <Link
-                  key={item.name}
+                  key={`mobile-${item.name}-${index}`}
                   href={item.href}
+                  target={item.external ? '_blank' : undefined}
+                  rel={item.external ? 'noopener noreferrer' : undefined}
                   className='text-neutral-700 hover:text-primary-800 block px-3 py-2 text-sm font-medium'
                   onClick={() => setMobileMenuOpen(false)}
                 >

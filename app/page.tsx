@@ -3,9 +3,12 @@ import Services from '@/components/Services'
 import About from '@/components/About'
 import Testimonials from '@/components/Testimonials'
 import ContactForm from '@/components/ContactForm'
+import { getSiteSettings } from '@/lib/sanity'
 import { Phone, Mail } from 'lucide-react'
 
-export default function Home() {
+export default async function Home() {
+  const siteSettings = await getSiteSettings()
+  const contactInfo = siteSettings?.contactInfo
   return (
     <>
       <Hero />
@@ -35,14 +38,20 @@ export default function Home() {
                     <Phone className="h-5 w-5 text-gold-600 mr-3" />
                     <div>
                       <p className="font-medium">Phone</p>
-                      <p className="text-neutral-600">+44 (0) 20 7123 4567</p>
+                      <a
+                  href='tel:+442071234567'
+                  className='text-neutral-600'
+                >{contactInfo?.phone || '+44 (0) 20 7123 4567'}</a>
                     </div>
                   </div>
                   <div className="flex items-center">
                     <Mail className="h-5 w-5 text-gold-600 mr-3" />
                     <div>
                       <p className="font-medium">Email</p>
-                      <p className="text-neutral-600">info@michaelstevenssolicitors.co.uk</p>
+                      <a
+                  href='mailto:info@michaelstevenssolicitors.co.uk'
+                  className='text-neutral-600'
+                >{contactInfo?.email || 'info@michaelstevenssolicitors.co.uk'}</a>
                     </div>
                   </div>
                 </div>
@@ -53,7 +62,10 @@ export default function Home() {
                 <p className="text-sm text-neutral-600 mb-3">
                   Need urgent legal assistance? Our emergency hotline is available 24/7.
                 </p>
-                <p className="font-semibold text-primary-800">+44 (0) 20 7123 4567</p>
+                <a
+                  href='tel:+442071234567'
+                  className='font-semibold text-primary-800'
+                >{contactInfo?.emergencyPhone || contactInfo?.phone || '+44 (0) 20 7123 4567'}</a>
               </div>
             </div>
 
