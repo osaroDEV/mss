@@ -9,15 +9,15 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-gold-500/20 to-transparent"></div>
       </div>
       
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <div className="animate-fade-in">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+            <h1 className="flex text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 border">
               Excellence in
-              <span className="text-gold-400 block">Legal Services</span>
+              <span className="text-gold-400 block">&nbsp;Legal Services</span>
             </h1>
-            <p className="text-xl text-neutral-200 mb-8 leading-relaxed">
+            <p className="md:text-xl text-neutral-200 mb-8 leading-relaxed">
               With over [] years of experience, Michael Stevens Solicitors provides comprehensive legal solutions for businesses and individuals across London and beyond.
             </p>
             
