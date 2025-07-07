@@ -28,7 +28,6 @@ export default function Footer() {
               <li><Link href="/about" className="text-neutral-300 hover:text-white transition-colors">About Us</Link></li>
               <li><Link href="/services" className="text-neutral-300 hover:text-white transition-colors">Our Services</Link></li>
               <li><Link href="/team" className="text-neutral-300 hover:text-white transition-colors">Our Team</Link></li>
-              <li><Link href="/news" className="text-neutral-300 hover:text-white transition-colors">News & Updates</Link></li>
               <li><Link href="/contact" className="text-neutral-300 hover:text-white transition-colors">Contact Us</Link></li>
             </ul>
           </div>
@@ -37,11 +36,11 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Practice Areas</h3>
             <ul className="space-y-2">
-              <li><Link href="/services/corporate-law" className="text-neutral-300 hover:text-white transition-colors">Corporate Law</Link></li>
-              <li><Link href="/services/employment-law" className="text-neutral-300 hover:text-white transition-colors">Employment Law</Link></li>
-              <li><Link href="/services/commercial-property" className="text-neutral-300 hover:text-white transition-colors">Commercial Property</Link></li>
-              <li><Link href="/services/litigation" className="text-neutral-300 hover:text-white transition-colors">Litigation</Link></li>
-              <li><Link href="/services/family-law" className="text-neutral-300 hover:text-white transition-colors">Family Law</Link></li>
+              <li><Link href="/services/corporate-law" className="text-neutral-300 hover:text-white transition-colors">Immigration Law</Link></li>
+              <li><Link href="/services/employment-law" className="text-neutral-300 hover:text-white transition-colors">Employment Matters</Link></li>
+              <li><Link href="/services/commercial-property" className="text-neutral-300 hover:text-white transition-colors">Family Law</Link></li>
+              <li><Link href="/services/litigation" className="text-neutral-300 hover:text-white transition-colors">Housing- Landlord & Tenants</Link></li>
+              <li><Link href="/services/family-law" className="text-neutral-300 hover:text-white transition-colors">Wills & Probate</Link></li>
             </ul>
           </div>
 
@@ -78,7 +77,7 @@ export default function Footer() {
         <div className="border-t border-primary-700 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-neutral-300 text-sm">
-              © 2024 Michael Stevens Solicitors. All rights reserved.
+              © 2025 Code Illustrated Labs. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link href="/privacy" className="text-neutral-300 hover:text-white text-sm transition-colors">Privacy Policy</Link>

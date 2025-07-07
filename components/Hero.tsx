@@ -18,7 +18,7 @@ export default function Hero() {
               <span className="text-gold-400 block">Legal Services</span>
             </h1>
             <p className="text-xl text-neutral-200 mb-8 leading-relaxed">
-              With over 25 years of experience, Michael Stevens Solicitors provides comprehensive legal solutions for businesses and individuals across London and beyond.
+              With over [] years of experience, Michael Stevens Solicitors provides comprehensive legal solutions for businesses and individuals across London and beyond.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
@@ -41,7 +41,7 @@ export default function Hero() {
             <div className="grid grid-cols-3 gap-6">
               <div className="text-center">
                 <Shield className="h-8 w-8 text-gold-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold">25+</div>
+                <div className="text-2xl font-bold">[]+</div>
                 <div className="text-sm text-neutral-300">Years Experience</div>
               </div>
               <div className="text-center">
