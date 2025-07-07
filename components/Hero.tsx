@@ -13,7 +13,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <div className="animate-fade-in">
-            <h1 className="flex text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+            <h1 className="flex text-2xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
               Excellence in
               <span className="text-gold-400 block">&nbsp;Legal Services</span>
             </h1>
