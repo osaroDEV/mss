@@ -3,14 +3,13 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import * as LucideIcons from "lucide-react"
 import { client } from "@/lib/sanity"
+import ViewAllServicesButton from "./ViewAllServicesBtn"
 
 // Define the types for our Sanity data
 interface Service {
   _id: string
   title: string
-  slug: {
-    current: string
-  }
+  slug: { current: string }
   shortDescription: string
   icon: string
   features: string[]
@@ -21,7 +20,7 @@ interface Service {
 // Create a proper icon mapping
 const iconMap: Record<string, React.ComponentType<any>> = {
   Building2: LucideIcons.Building2,
-  Users : LucideIcons.Users,
+  Users: LucideIcons.Users,
   Home: LucideIcons.Home,
   Skull: LucideIcons.Skull,
   Heart: LucideIcons.Heart,
@@ -29,7 +28,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   Briefcase: LucideIcons.Briefcase,
   Scale: LucideIcons.Scale,
   Plane: LucideIcons.Plane,
-  UsersRound : LucideIcons.UsersRound,
+  UsersRound: LucideIcons.UsersRound,
   Calculator: LucideIcons.Calculator,
   Globe: LucideIcons.Globe,
   // Add more icons as needed
@@ -130,7 +129,7 @@ const fallbackServices = [
     slug: { current: "litigation" },
     shortDescription:
       "Skilled representation in commercial disputes with a focus on achieving favorable outcomes efficiently.",
-    icon: "Scale", // Changed from 'Gavel' to 'Scale' as it's more commonly available
+    icon: "Scale",
     features: ["Commercial Litigation", "Arbitration", "Mediation", "Debt Recovery"],
     featured: false,
     order: 4,
@@ -168,27 +167,6 @@ export default async function Services() {
   return (
     <section className="py-16 lg:py-24 bg-neutral-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Debug info */}
-        {/* <div className="mb-8 p-4 bg-blue-100 rounded-lg">
-          <p className="text-sm text-blue-700">
-            {isUsingSanityData
-              ? "✅ Using Sanity CMS data"
-              : "⚠️ Using fallback data - Create services in Sanity Studio"}
-          </p>
-          <p className="text-xs text-blue-600 mt-1">
-            Services found: {services.length} | Data source: {isUsingSanityData ? "Sanity CMS" : "Fallback"}
-          </p>
-          {!isUsingSanityData && (
-            <p className="text-xs text-blue-600 mt-1">
-              Go to{" "}
-              <a href="http://localhost:3333" target="_blank" className="underline" rel="noreferrer">
-                Sanity Studio
-              </a>{" "}
-              → Services → Create to add your services
-            </p>
-          )}
-        </div> */}
-
         <div className="text-center mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-800 mb-4">Our Practice Areas</h2>
           <p className="md:text-xl text-neutral-600 max-w-3xl mx-auto">
@@ -213,11 +191,6 @@ export default async function Services() {
                     Featured
                   </div>
                 )}
-
-                {/* Debug icon info */}
-                {/* <div className="absolute top-2 left-2 bg-gray-100 text-xs px-2 py-1 rounded text-gray-600">
-                  Icon: {service.icon || "none"}
-                </div> */}
 
                 <div className="flex items-center mb-6">
                   <div className="bg-primary-100 group-hover:bg-primary-200 transition-colors duration-300 rounded-lg p-3">
@@ -253,15 +226,8 @@ export default async function Services() {
           })}
         </div>
 
-        {/* <div className="text-center mt-12">
-          <Link
-            href="/services"
-            className="bg-primary-800 hover:bg-primary-900 text-white px-8 py-3 rounded-md font-semibold inline-flex items-center transition-colors duration-200"
-          >
-            View All Services
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Link>
-        </div> */}
+        {/* Conditionally rendered "View All Services" button */}
+        <ViewAllServicesButton />
       </div>
     </section>
   )
