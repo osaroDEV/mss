@@ -35,7 +35,7 @@ export default function ContactForm() {
           <Send className="h-12 w-12 mx-auto" />
         </div>
         <h3 className="text-lg font-semibold text-green-800 mb-2">Message Sent Successfully!</h3>
-        <p className="text-green-600">We'll get back to you within 24 hours.</p>
+        <p className="text-green-600">We&apos;ll get back to you within 24 hours.</p>
       </div>
     )
   }
@@ -102,15 +102,15 @@ export default function ContactForm() {
             value={contactFormData.subject}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 border border-neutral-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+            className="w-full px-4 py-3 border border-neutral-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors font-sans"
           >
             <option value="">Select a subject</option>
-            <option value="corporate-law">Corporate Law</option>
-            <option value="employment-law">Employment Law</option>
-            <option value="commercial-property">Commercial Property</option>
-            <option value="litigation">Litigation</option>
+            <option value="immigration-law">Immigration Law</option>
+            <option value="business-migration">Business Migration</option>
+            <option value="employment-matters">Employment Matters</option>
             <option value="family-law">Family Law</option>
-            <option value="regulatory">Regulatory & Compliance</option>
+            <option value="housing-landlord-tenenants">Housing Landlord and Tenants</option>
+            <option value="wills-probate">Wills and Probate</option>
             <option value="other">Other</option>
           </select>
         </div>

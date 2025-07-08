@@ -152,10 +152,10 @@ export default function Footer({ siteSettings }: FooterProps) {
               <div className='flex items-center'>
                 <Mail className='h-5 w-5 mr-3 text-gold-400' />
                 <a
-                  href='mailto:info@michaelstevenssolicitors.co.uk'
-                  className='text-neutral-300 hover:text-gold-400 transition-colors'
+                  href='mailto:info@michaelstevenssolicitors.com'
+                  className='text-[15px] text-neutral-300 hover:text-gold-400 transition-colors'
                 >
-                 {contactInfo?.email || 'info@michaelstevenssolicitors.co.uk'}
+                 {contactInfo?.email || 'info@michaelstevenssolicitors.com'}
                 </a>
               </div>
               <div className='flex items-start'>
