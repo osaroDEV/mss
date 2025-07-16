@@ -81,7 +81,7 @@ export default function Footer({ siteSettings }: FooterProps) {
             <ul className='space-y-2'>
               <li>
                 <Link
-                  href='/services/corporate-law'
+                  href='/services/immigration-law'
                   className='text-neutral-300 hover:text-white transition-colors'
                 >
                   Immigration Law
@@ -89,7 +89,7 @@ export default function Footer({ siteSettings }: FooterProps) {
               </li>
               <li>
                 <Link
-                  href='/services/employment-law'
+                  href='/services/employment-matters'
                   className='text-neutral-300 hover:text-white transition-colors'
                 >
                   Employment Matters
@@ -97,7 +97,7 @@ export default function Footer({ siteSettings }: FooterProps) {
               </li>
               <li>
                 <Link
-                  href='/services/commercial-property'
+                  href='/services/family-law'
                   className='text-neutral-300 hover:text-white transition-colors'
                 >
                   Family Law
@@ -105,7 +105,7 @@ export default function Footer({ siteSettings }: FooterProps) {
               </li>
               <li>
                 <Link
-                  href='/services/litigation'
+                  href='/services/housing-landlord-and-tenants'
                   className='text-neutral-300 hover:text-white transition-colors'
                 >
                   Housing- Landlord & Tenants
@@ -113,7 +113,7 @@ export default function Footer({ siteSettings }: FooterProps) {
               </li>
               <li>
                 <Link
-                  href='/services/family-law'
+                  href='/services/wills-and-probate'
                   className='text-neutral-300 hover:text-white transition-colors'
                 >
                   Wills & Probate
