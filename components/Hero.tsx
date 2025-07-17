@@ -15,7 +15,7 @@ export default function Hero() {
           <div className='animate-fade-in'>
             <h1 className='text-2xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6'>
               Excellence in
-              <span className='text-gold-400'>&nbsp;Legal Services</span>
+              <span className='text-gold-600'>&nbsp;Legal Services</span>
             </h1>
             <p className='md:text-xl text-neutral-200 mb-8 leading-relaxed'>
               With over [] years of experience, Michael Stevens Solicitors
@@ -26,14 +26,14 @@ export default function Hero() {
             <div className='flex flex-col sm:flex-row gap-4 mb-12'>
               <Link
                 href='/contact'
-                className='bg-gold-600 hover:bg-gold-700 text-white px-8 py-4 rounded-md font-semibold text-lg inline-flex items-center justify-center transition-colors duration-200 group'
+                className='flex-1 bg-gold-600 hover:bg-gold-700 text-white px-8 py-4 rounded-md font-semibold text-lg inline-flex items-center justify-center transition-colors duration-200 group'
               >
                 Free Consultation
                 <ArrowRight className='ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform' />
               </Link>
               <Link
                 href='/services'
-                className='border-2 border-white hover:bg-white hover:text-primary-800 text-white px-8 py-4 rounded-md font-semibold text-lg inline-flex items-center justify-center transition-colors duration-200'
+                className='flex-1 border-2 border-white hover:bg-white hover:text-primary-800 text-white px-8 py-4 rounded-md font-semibold text-lg inline-flex items-center justify-center transition-colors duration-200'
               >
                 Our Services
               </Link>

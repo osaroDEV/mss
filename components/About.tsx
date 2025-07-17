@@ -107,7 +107,7 @@ export default async function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-800 mb-6">
+            <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold text-primary-800 mb-6">
               {data.title}
             </h2>
             
@@ -126,7 +126,7 @@ export default async function About() {
                 return (
                   <p 
                     key={index}
-                    className='text-neutral-600 mb-8 leading-relaxed'
+                    className='md:text-xl text-neutral-600 mb-8 leading-relaxed'
                   >
                     {text}
                   </p>
