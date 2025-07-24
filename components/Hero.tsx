@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, Shield, Scale, Users } from 'lucide-react';
+import { ArrowRight, Shield, Scale, Users, Award, ShieldCheck } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -14,11 +14,10 @@ export default function Hero() {
           {/* Content */}
           <div className='animate-fade-in'>
             <h1 className='text-2xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6'>
-              Excellence in
-              <span className='text-gold-600'>&nbsp;Legal Services</span>
+              Excellence in Legal Services
             </h1>
             <p className='md:text-xl text-neutral-200 mb-8 leading-relaxed'>
-              With over [] years of experience, Michael Stevens Solicitors
+              Michael Stevens Solicitors
               provides comprehensive legal solutions for businesses and
               individuals across London and beyond.
             </p>
@@ -28,7 +27,7 @@ export default function Hero() {
                 href='/contact'
                 className='flex-1 bg-gold-600 hover:bg-gold-700 text-white px-8 py-4 rounded-md font-semibold text-lg inline-flex items-center justify-center transition-colors duration-200 group'
               >
-                Free Consultation
+                Consultation
                 <ArrowRight className='ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform' />
               </Link>
               <Link
@@ -42,9 +41,9 @@ export default function Hero() {
             {/* Trust indicators */}
             <div className='grid grid-cols-3 gap-6'>
               <div className='text-center'>
-                <Shield className='h-8 w-8 text-gold-400 mx-auto mb-2' />
-                <div className='text-2xl font-bold'>[]+</div>
-                <div className='text-sm text-neutral-300'>Years Experience</div>
+                <Award className='h-8 w-8 text-gold-400 mx-auto mb-2' />
+                <div className='text-2xl font-bold'>Proven</div>
+                <div className='text-sm text-neutral-300'>Track Record</div>
               </div>
               <div className='text-center'>
                 <Users className='h-8 w-8 text-gold-400 mx-auto mb-2' />
@@ -52,8 +51,8 @@ export default function Hero() {
                 <div className='text-sm text-neutral-300'>Clients Served</div>
               </div>
               <div className='text-center'>
-                <Scale className='h-8 w-8 text-gold-400 mx-auto mb-2' />
-                <div className='text-2xl font-bold'>98%</div>
+                <ShieldCheck className='h-8 w-8 text-gold-400 mx-auto mb-2' />
+                <div className='text-2xl font-bold'>Good</div>
                 <div className='text-sm text-neutral-300'>Success Rate</div>
               </div>
             </div>

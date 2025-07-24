@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Phone, Mail, MapPin, Clock, Shield } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { type SiteSettings } from '@/lib/sanity';
 
 interface FooterProps {
@@ -27,34 +27,12 @@ export default function Footer({ siteSettings }: FooterProps) {
               {siteSettings?.description ||
                 'Providing exceptional legal services with integrity, expertise, and personal attention for over [] years.'}
             </p>
-            
-            {/* SRA Regulation Information */}
-            <div className='bg-primary-700/50 rounded-lg p-4 mb-4 border border-primary-600'>
-              <div className='flex items-start mb-2'>
-                <Shield className='h-4 w-4 mr-2 mt-0.5 text-gold-400 flex-shrink-0' />
-                <div className='text-sm'>
-                  <p className='text-white font-medium mb-1'>SRA Regulated</p>
-                  <p className='text-neutral-300 leading-relaxed'>
-                    {legalNotices?.regulatoryInfo ||
-                      'Authorised and regulated by the Solicitors Regulation Authority'}
-                  </p>
-                  {legalNotices?.sraNumber && (
-                    <p className='text-neutral-300 mt-1'>
-                      SRA Number: {legalNotices.sraNumber}
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className='text-xs text-neutral-400'>
-                <a 
-                  href="https://www.sra.org.uk/consumers/solicitor-check/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className='hover:text-gold-400 transition-colors underline'
-                >
-                  Verify our regulation status
-                </a>
-              </div>
+            <div className='flex items-center text-sm text-neutral-300'>
+              <Clock className='h-4 w-4 mr-2' />
+              <span>
+                {legalNotices?.regulatoryInfo ||
+                  'Regulated by the Solicitors Regulation Authority'}
+              </span>
             </div>
           </div>
 

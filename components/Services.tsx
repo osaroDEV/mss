@@ -31,7 +31,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   Building2: LucideIcons.Building2,
   Users: LucideIcons.Users,
   Home: LucideIcons.Home,
-  Skull: LucideIcons.Skull,
+  Scroll: LucideIcons.Scroll,
   Heart: LucideIcons.Heart,
   FileText: LucideIcons.FileText,
   Briefcase: LucideIcons.Briefcase,

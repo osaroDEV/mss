@@ -56,6 +56,11 @@ export interface BlogPost {
   categories: string[]
 }
 
+export interface HeaderSettings {
+   contactInfo: {
+    phone: string
+    email: string}
+  }
 export interface PageContent {
   _id: string
   title: string

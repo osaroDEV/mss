@@ -3,13 +3,14 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Menu, X, Phone, Mail } from 'lucide-react';
-import { getSiteSettings, type SiteSettings } from '@/lib/sanity'
+import { HeaderSettings, SiteSettings } from '@/lib/sanity'
 
 interface HeaderProps {
   siteSettings?: SiteSettings | null
+  headerSettings?: HeaderSettings | null; // Optional header settings
 }
 
-export default function Header({ siteSettings }: HeaderProps) {
+export default function Header({ siteSettings, headerSettings }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Fallback navigation if no siteSettings
@@ -17,7 +18,6 @@ export default function Header({ siteSettings }: HeaderProps) {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
-    { name: 'Team', href: '/team' },
     { name: 'Contact', href: '/contact' },
   ]
 
@@ -44,14 +44,14 @@ export default function Header({ siteSettings }: HeaderProps) {
                 <a
                   href='tel:+442071234567'
                   className='text-[10px] md:text-base'
-                >{siteSettings?.contactInfo?.phone || '+44 (0) 20 7123 4567'}</a>
+                >{headerSettings?.contactInfo?.phone || '+44 (0) 20 7123 4567'}</a>
               </div>
               <div className='flex items-center'>
                 <Mail className='h-4 w-4 mr-2' />
                 <a
-                  href='mailto:info@michaelstevenssolicitors.co.uk'
+                  href='mailto:info@michaelstevenssolicitors.com'
                   className='text-[10px] md:text-base'
-                >{siteSettings?.contactInfo?.email || 'info@michaelstevenssolicitors.co.uk'}</a>
+                >{headerSettings?.contactInfo?.email || 'info@michaelstevenssolicitors.co.u'}</a>
               </div>
             </div>
             {/* <div className='hidden md:block'>
@@ -96,7 +96,7 @@ export default function Header({ siteSettings }: HeaderProps) {
               href='/contact'
               className='bg-gold-600 hover:bg-gold-700 text-white px-6 py-2 rounded-md text-sm font-medium transition-colors duration-200'
             >
-              Free Consultation
+             Consultation
             </Link>
           </div>
 
