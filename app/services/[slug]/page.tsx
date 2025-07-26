@@ -1,11 +1,12 @@
 import type React from "react"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { ArrowLeft, CheckCircle, ArrowRight } from "lucide-react"
+import { CheckCircle, ArrowRight, ChevronRight } from "lucide-react"
 import * as LucideIcons from "lucide-react"
 import { PortableText } from "@portabletext/react"
 import { client } from "@/lib/sanity"
 import type { Metadata } from "next"
+import { urlFor } from "@/lib/sanity-image"
 
 // Define the types for our Sanity data
 interface ProcessStep {
@@ -18,6 +19,12 @@ interface Service {
   _id: string
   title: string
   slug: { current: string }
+  heroImage?: {
+    asset: {
+      _ref: string
+    }
+    alt?: string
+  }
   shortDescription: string
   detailedDescription: any[] // Rich text blocks from Sanity
   icon: string
@@ -26,6 +33,7 @@ interface Service {
   processSteps?: ProcessStep[]
   featured: boolean
   order: number
+  category?: string // Added for breadcrumb
 }
 
 // Create a proper icon mapping
@@ -45,6 +53,8 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   Shield: LucideIcons.Shield,
   Gavel: LucideIcons.Gavel,
   BookOpen: LucideIcons.BookOpen,
+  Banknote: LucideIcons.Banknote,
+  TrendingUp: LucideIcons.TrendingUp,
 }
 
 // Function to get the Lucide icon component by name
@@ -52,16 +62,13 @@ function getIconComponent(iconName: string) {
   if (!iconName) {
     return LucideIcons.Briefcase
   }
-
   if (iconMap[iconName]) {
     return iconMap[iconName]
   }
-
   const IconComponent = (LucideIcons as any)[iconName]
   if (IconComponent && typeof IconComponent === "function") {
     return IconComponent
   }
-
   return LucideIcons.Briefcase
 }
 
@@ -117,23 +124,27 @@ const portableTextComponents = {
 
 async function getServiceBySlug(slug: string): Promise<Service | null> {
   const query = `*[_type == "service" && slug.current == $slug][0] {
-    _id,
+  _id,
+  title,
+  slug,
+  heroImage {
+    asset,
+    alt
+  },
+  shortDescription,
+  detailedDescription,
+  icon,
+  features,
+  benefits,
+  processSteps[] {
+    step,
     title,
-    slug,
-    shortDescription,
-    detailedDescription,
-    icon,
-    features,
-    benefits,
-    processSteps[] {
-      step,
-      title,
-      description
-    },
-    featured,
-    order
-  }`
-
+    description
+  },
+  featured,
+  order,
+  category
+}`
   try {
     const service = await client.fetch(query, { slug })
     return service || null
@@ -146,13 +157,11 @@ async function getServiceBySlug(slug: string): Promise<Service | null> {
 // Generate metadata for SEO
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const service = await getServiceBySlug(params.slug)
-
   if (!service) {
     return {
       title: "Service Not Found",
     }
   }
-
   return {
     title: `${service.title} | Legal Services`,
     description: service.shortDescription,
@@ -169,7 +178,6 @@ export async function generateStaticParams() {
   const query = `*[_type == "service"] {
     "slug": slug.current
   }`
-
   try {
     const services = await client.fetch(query)
     return services.map((service: { slug: string }) => ({
@@ -181,6 +189,19 @@ export async function generateStaticParams() {
   }
 }
 
+// Helper function to split title for two-tone effect
+function splitTitle(title: string): { firstPart: string; secondPart: string } {
+  const words = title.split(" ")
+  if (words.length <= 2) {
+    return { firstPart: words[0] || "", secondPart: words.slice(1).join(" ") }
+  }
+  const midPoint = Math.ceil(words.length / 2)
+  return {
+    firstPart: words.slice(0, midPoint).join(" "),
+    secondPart: words.slice(midPoint).join(" "),
+  }
+}
+
 export default async function ServicePage({ params }: { params: { slug: string } }) {
   const service = await getServiceBySlug(params.slug)
 
@@ -189,44 +210,88 @@ export default async function ServicePage({ params }: { params: { slug: string }
   }
 
   const IconComponent = getIconComponent(service.icon)
+  const { firstPart, secondPart } = splitTitle(service.title)
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header Section */}
-      <div className="bg-primary-50 py-12 lg:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Back Navigation */}
-          <Link
-            href="/services"
-            className="inline-flex items-center text-primary-700 hover:text-primary-800 mb-8 transition-colors"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Services
-          </Link>
+      {/* Hero Section with Background Image */}
+      <div className="relative min-h-[60vh] lg:min-h-[70vh] flex items-center">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: service.heroImage
+              ? `url(${urlFor(service.heroImage).width(1920).height(1080).url()})`
+              : `url('/placeholder.svg?height=800&width=1200')`,
+          }}
+        >
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-black/60"></div>
+        </div>
 
-          {/* Service Header */}
-          <div className="flex items-start gap-6">
-            <div className="bg-primary-100 rounded-xl p-4 flex-shrink-0">
-              <IconComponent className="h-12 w-12 text-primary-700" />
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-4">
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-800">{service.title}</h1>
-                {service.featured && (
-                  <span className="bg-gold-500 text-white text-sm font-semibold px-3 py-1 rounded-full">Featured</span>
-                )}
-              </div>
-              <p className="text-lg md:text-xl text-neutral-600 leading-relaxed">{service.shortDescription}</p>
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          {/* Breadcrumb Navigation */}
+          <nav className="flex items-center space-x-2 text-sm mb-8">
+            <Link href="/" className="text-white/80 hover:text-white transition-colors">
+              Home
+            </Link>
+            <ChevronRight className="h-4 w-4 text-white/60" />
+            <Link href="/services" className="text-white/80 hover:text-white transition-colors">
+              {service.title || "Business"}
+            </Link>
+          </nav>
+
+          {/* Hero Content */}
+          <div className="max-w-4xl">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white font-bold leading-tight mb-6">
+              {service.title}
+            </h1>
+
+            <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-3xl mb-8">
+              {service.shortDescription}
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center bg-gold-600 hover:bg-gold-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors"
+              >
+                Get Expert Advice
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+              <Link
+                href="#details"
+                className="inline-flex items-center justify-center border-2 border-white/30 hover:border-white/50 text-white font-semibold py-4 px-8 rounded-lg transition-colors backdrop-blur-sm"
+              >
+                Learn More
+              </Link>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <div id="details" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Main Content Column */}
           <div className="lg:col-span-2">
+            {/* Service Icon and Title */}
+            <div className="flex items-center gap-4 mb-8">
+              <div className="bg-primary-100 rounded-xl p-3 flex-shrink-0">
+                <IconComponent className="h-8 w-8 text-primary-700" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900">Service Overview</h2>
+                {service.featured && (
+                  <span className="inline-block bg-gold-500 text-white text-xs font-semibold px-2 py-1 rounded-full mt-1">
+                    Featured Service
+                  </span>
+                )}
+              </div>
+            </div>
+
             {/* Detailed Description */}
             {service.detailedDescription && service.detailedDescription.length > 0 && (
               <div className="prose prose-lg max-w-none mb-12">
@@ -244,7 +309,7 @@ export default async function ServicePage({ params }: { params: { slug: string }
                     .map((step, index) => (
                       <div key={index} className="flex gap-4">
                         <div className="flex-shrink-0">
-                          <div className="w-10 h-10 bg-primary-700 text-white rounded-full flex items-center justify-center font-semibold">
+                          <div className="w-10 h-10 bg-teal-600 text-white rounded-full flex items-center justify-center font-semibold">
                             {step.step}
                           </div>
                         </div>
@@ -265,7 +330,7 @@ export default async function ServicePage({ params }: { params: { slug: string }
               {/* Key Features */}
               {service.features && service.features.length > 0 && (
                 <div className="bg-neutral-50 rounded-lg p-6">
-                  <h3 className="text-lg font-semibold text-primary-800 mb-4">Key Features</h3>
+                  <h3 className="text-lg font-semibold text-primary-800 mb-4">We assist with</h3>
                   <ul className="space-y-3">
                     {service.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-3">
@@ -279,12 +344,12 @@ export default async function ServicePage({ params }: { params: { slug: string }
 
               {/* Benefits */}
               {service.benefits && service.benefits.length > 0 && (
-                <div className="bg-primary-50 rounded-lg p-6">
+                <div className="bg-teal-50 rounded-lg p-6">
                   <h3 className="text-lg font-semibold text-primary-800 mb-4">Benefits</h3>
                   <ul className="space-y-3">
                     {service.benefits.map((benefit, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <ArrowRight className="h-5 w-5 text-primary-700 flex-shrink-0 mt-0.5" />
+                        <ArrowRight className="h-5 w-5 text-teal-600 flex-shrink-0 mt-0.5" />
                         <span className="text-neutral-600">{benefit}</span>
                       </li>
                     ))}
@@ -293,7 +358,7 @@ export default async function ServicePage({ params }: { params: { slug: string }
               )}
 
               {/* Contact CTA */}
-              <div className="bg-gold-50 border border-gold-200 rounded-lg p-6">
+              <div className="bg-gradient-to-br from-gold-50 to-gold-100 border border-gold-200 rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-primary-800 mb-3">Need Expert Advice?</h3>
                 <p className="text-neutral-600 mb-4">
                   Contact our experienced team for a consultation about your {service.title.toLowerCase()} needs.

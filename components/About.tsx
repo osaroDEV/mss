@@ -185,7 +185,7 @@ export default async function About() {
             )}
             
             {/* Success Rate Badge */}
-            {data.successRate ? (
+            {/* {data.successRate ? (
               <div className="absolute -bottom-4 -right-4 bg-gold-500 rounded-lg p-6 shadow-lg">
                 <div className="text-white text-center">
                   <div className="text-2xl font-bold">{data.successRate.percentage}%</div>
@@ -199,7 +199,7 @@ export default async function About() {
                   <div className="text-xs">in Sanity</div>
                 </div>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

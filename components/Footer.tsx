@@ -25,7 +25,7 @@ export default function Footer({ siteSettings }: FooterProps) {
             </div>
             <p className='text-neutral-300 mb-4'>
               {siteSettings?.description ||
-                'Providing exceptional legal services with integrity, expertise, and personal attention for over [] years.'}
+                'Providing exceptional legal services with integrity, expertise, and personal attention.'}
             </p>
             <div className='flex items-center text-sm text-neutral-300'>
               <Clock className='h-4 w-4 mr-2' />
@@ -169,8 +169,7 @@ export default function Footer({ siteSettings }: FooterProps) {
                     ))
                   ) : (
                     <>
-                      <p className="text-neutral-300">Mon-Fri: 9:00 AM - 6:00 PM</p>
-                      <p className="text-neutral-300">Emergency: 24/7</p>
+                      <p className="text-neutral-300">Mon-Fri: 9:30AM - 6:00PM</p>
                     </>
                   )}
                 </div>
