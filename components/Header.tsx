@@ -42,16 +42,16 @@ export default function Header({ siteSettings, headerSettings }: HeaderProps) {
               <div className='flex items-center'>
                 <Phone className='h-4 w-4 mr-2' />
                 <a
-                  href='tel:+442071234567'
+                  href='tel:+447525181825'
                   className='text-[10px] md:text-base'
-                >{headerSettings?.contactInfo?.phone || '+44 (0) 20 7123 4567'}</a>
+                >{headerSettings?.contactInfo?.phone || '+44 (0) 75 2518 1825'}</a>
               </div>
               <div className='flex items-center'>
                 <Mail className='h-4 w-4 mr-2' />
                 <a
                   href='mailto:info@michaelstevenssolicitors.com'
                   className='text-[10px] md:text-base'
-                >{headerSettings?.contactInfo?.email || 'info@michaelstevenssolicitors.co.u'}</a>
+                >{headerSettings?.contactInfo?.email || 'info@michaelstevenssolicitors.com'}</a>
               </div>
             </div>
             {/* <div className='hidden md:block'>
