@@ -89,6 +89,14 @@ export default function Footer({ siteSettings }: FooterProps) {
               </li>
               <li>
                 <Link
+                  href='/services/business-migration'
+                  className='text-neutral-300 hover:text-white transition-colors'
+                >
+                  Business Migration
+                </Link>
+              </li>
+              <li>
+                <Link
                   href='/services/employment-matters'
                   className='text-neutral-300 hover:text-white transition-colors'
                 >
