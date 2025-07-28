@@ -1,6 +1,7 @@
 import { client } from '@/lib/sanity'
 import { urlFor } from '@/lib/sanity'
 import Image from 'next/image'
+import Link from 'next/link'
 import * as LucideIcons from 'lucide-react'
 
 // Define the types for our Sanity data
@@ -35,6 +36,28 @@ interface AboutPageData {
     label: string
   }
 }
+
+// Regulatory bodies configuration
+const REGULATORY_BODIES = {
+  sra: {
+    name: 'Solicitors Regulation Authority',
+    url: 'https://www.sra.org.uk/consumers/register/organisation/?sraNumber=625253&prevSearchText=michael%20stevens%20solicitors&prevSearchFilter=',
+    logoUrl: '/images/sra-logo.png', // Replace with your actual logo path
+    number: '[Your SRA Number]',
+  },
+  ico: {
+    name: "Information Commissioner's Office",
+    url: 'https://ico.org.uk/ESDWebPages/Entry/ZA050265',
+    logoUrl: '/images/ico-logo.png', // Replace with your actual logo path
+    number: '[Your ICO Registration Number]',
+  },
+  lawSociety: {
+    name: 'The Law Society of England & Wales',
+    url: 'https://solicitors.lawsociety.org.uk/search/results?Pro=True&Type=0&Name=MICHAEL_STEVENS_SOLICITORS',
+    logoUrl: '/images/law-society-logo.png', // Replace with your actual logo path
+    number: 'Member of The Law Society',
+  },
+};
 
 // Function to get the Lucide icon component by name
 function getIconComponent(iconName: string) {
@@ -91,18 +114,6 @@ export default async function About() {
   return (
     <section className="py-16 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Debug info */}
-        {/* <div className="mb-8 p-4 bg-green-100 rounded-lg">
-          <p className="text-sm text-green-700">
-            ✅ Data successfully fetched from Sanity!
-          </p>
-          <p className="text-xs text-green-600 mt-1">
-            Title: {data.title} | Achievements: {data.achievements?.length || 0} | Introduction blocks: {data.introduction?.length || 0}
-          </p>
-          <p className="text-xs text-green-600 mt-1">
-            Team Image: {data.teamImage ? '✅' : '❌'} | Success Rate: {data.successRate ? '✅' : '❌'}
-          </p>
-        </div> */}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
@@ -110,12 +121,6 @@ export default async function About() {
             <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold text-primary-800 mb-6">
               {data.title}
             </h2>
-            
-            {/* {data.subtitle && (
-              <p className="text-xl text-neutral-500 mb-6">
-                {data.subtitle}
-              </p>
-            )} */}
             
             {/* Introduction Paragraphs */}
             {data.introduction?.length > 0 ? (
@@ -138,7 +143,7 @@ export default async function About() {
             
             {/* Achievements Grid */}
             {data.achievements?.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
                 {data.achievements.map((achievement, index) => {
                   const IconComponent = getIconComponent(achievement.icon)
                   return (
@@ -159,8 +164,104 @@ export default async function About() {
                 })}
               </div>
             ) : (
-              <p className="text-red-500">No achievements found in Sanity</p>
+              <p className="text-red-500 mb-8">No achievements found in Sanity</p>
             )}
+
+            {/* Regulatory Information */}
+            <div className="bg-neutral-50 rounded-lg p-6 border border-neutral-200">
+              <h3 className="font-semibold text-primary-800 mb-6 text-lg">Regulatory Information</h3>
+              <div className="space-y-6 text-sm text-neutral-600">
+                {/* SRA */}
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mr-4">
+                    <Link 
+                      href={REGULATORY_BODIES.sra.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block hover:opacity-80 transition-opacity"
+                    >
+                      <Image
+                        src={REGULATORY_BODIES.sra.logoUrl}
+                        alt="SRA Logo"
+                        width={60}
+                        height={40}
+                        className="object-contain"
+                      />
+                    </Link>
+                  </div>
+                  <div>
+                    <Link 
+                      href={REGULATORY_BODIES.sra.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-neutral-800 hover:text-primary-600 transition-colors"
+                    >
+                      {REGULATORY_BODIES.sra.name}
+                    </Link>
+                  </div>
+                </div>
+
+                {/* ICO */}
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mr-4">
+                    <Link 
+                      href={REGULATORY_BODIES.ico.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block hover:opacity-80 transition-opacity"
+                    >
+                      <Image
+                        src={REGULATORY_BODIES.ico.logoUrl}
+                        alt="ICO Logo"
+                        width={60}
+                        height={40}
+                        className="object-contain"
+                      />
+                    </Link>
+                  </div>
+                  <div>
+                    <Link 
+                      href={REGULATORY_BODIES.ico.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-neutral-800 hover:text-primary-600 transition-colors"
+                    >
+                      {REGULATORY_BODIES.ico.name}
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Law Society */}
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mr-4">
+                    <Link 
+                      href={REGULATORY_BODIES.lawSociety.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block hover:opacity-80 transition-opacity"
+                    >
+                      <Image
+                        src={REGULATORY_BODIES.lawSociety.logoUrl}
+                        alt="Law Society Logo"
+                        width={60}
+                        height={40}
+                        className="object-contain"
+                      />
+                    </Link>
+                  </div>
+                  <div>
+                    <Link 
+                      href={REGULATORY_BODIES.lawSociety.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-neutral-800 hover:text-primary-600 transition-colors"
+                    >
+                      {REGULATORY_BODIES.lawSociety.name}
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Image */}
@@ -183,23 +284,6 @@ export default async function About() {
                 </div>
               </div>
             )}
-            
-            {/* Success Rate Badge */}
-            {/* {data.successRate ? (
-              <div className="absolute -bottom-4 -right-4 bg-gold-500 rounded-lg p-6 shadow-lg">
-                <div className="text-white text-center">
-                  <div className="text-2xl font-bold">{data.successRate.percentage}%</div>
-                  <div className="text-sm">{data.successRate.label}</div>
-                </div>
-              </div>
-            ) : (
-              <div className="absolute -bottom-4 -right-4 bg-red-500 rounded-lg p-6 shadow-lg">
-                <div className="text-white text-center">
-                  <div className="text-sm">No Success Rate</div>
-                  <div className="text-xs">in Sanity</div>
-                </div>
-              </div>
-            )} */}
           </div>
         </div>
       </div>

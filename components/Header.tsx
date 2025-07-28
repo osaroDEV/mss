@@ -145,7 +145,7 @@ export default function Header({ siteSettings, headerSettings }: HeaderProps) {
                 className='bg-gold-600 hover:bg-gold-700 text-white block px-3 py-2 rounded-md text-base font-medium mt-4'
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Free Consultation
+                Consultation
               </Link>
             </div>
           </div>

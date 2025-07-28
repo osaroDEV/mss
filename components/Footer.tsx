@@ -1,10 +1,41 @@
 import Link from 'next/link';
-import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import Image from 'next/image';
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  Shield,
+  Database,
+  Scale,
+} from 'lucide-react';
 import { type SiteSettings } from '@/lib/sanity';
 
 interface FooterProps {
   siteSettings?: SiteSettings | null;
 }
+
+// Regulatory bodies configuration
+const REGULATORY_BODIES = {
+  sra: {
+    name: 'Solicitors Regulation Authority',
+    url: 'https://www.sra.org.uk/consumers/register/organisation/?sraNumber=625253&prevSearchText=michael%20stevens%20solicitors&prevSearchFilter=',
+    logoUrl: '/images/sra-logo-white.png', // Use white version for dark footer
+    number: '[Your SRA Number]',
+  },
+  ico: {
+    name: "Information Commissioner's Office",
+    url: 'https://ico.org.uk/ESDWebPages/Entry/ZA050265',
+    logoUrl: '/images/ico-logo-white.png', // Use white version for dark footer
+    number: '[Your ICO Number]',
+  },
+  lawSociety: {
+    name: 'The Law Society',
+    url: 'https://solicitors.lawsociety.org.uk/search/results?Pro=True&Type=0&Name=MICHAEL_STEVENS_SOLICITORS',
+    logoUrl: '/images/law-society-logo-white.png', // Use white version for dark footer
+    number: 'England & Wales',
+  },
+};
 
 export default function Footer({ siteSettings }: FooterProps) {
   const contactInfo = siteSettings?.contactInfo;
@@ -163,7 +194,7 @@ export default function Footer({ siteSettings }: FooterProps) {
                   href='mailto:info@michaelstevenssolicitors.com'
                   className='text-[15px] text-neutral-300 hover:text-gold-400 transition-colors'
                 >
-                 {contactInfo?.email || 'info@michaelstevenssolicitors.com'}
+                  {contactInfo?.email || 'info@michaelstevenssolicitors.com'}
                 </a>
               </div>
               <div className='flex items-start'>
@@ -171,13 +202,15 @@ export default function Footer({ siteSettings }: FooterProps) {
                 <div>
                   {contactInfo?.hours && contactInfo.hours.length > 0 ? (
                     contactInfo.hours.map((schedule, index) => (
-                      <p key={index} className="text-neutral-300">
+                      <p key={index} className='text-neutral-300'>
                         {schedule.days}: {schedule.hours}
                       </p>
                     ))
                   ) : (
                     <>
-                      <p className="text-neutral-300">Mon-Fri: 9:30AM - 6:00PM</p>
+                      <p className='text-neutral-300'>
+                        Mon-Fri: 9:30AM - 6:00PM
+                      </p>
                     </>
                   )}
                 </div>
@@ -186,7 +219,114 @@ export default function Footer({ siteSettings }: FooterProps) {
           </div>
         </div>
 
-        <div className='border-t border-primary-700 mt-8 pt-8'>
+        {/* Regulatory Information Section */}
+        <div className='border-t border-primary-700 mt-8 pt-8 mb-8'>
+          <h3 className='text-lg font-semibold mb-6 text-gold-400'>
+            Regulatory Information
+          </h3>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-8 text-sm'>
+            {/* SRA */}
+            <div className='flex flex-col items-center text-center'>
+              <Link
+                href={REGULATORY_BODIES.sra.url}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='block hover:opacity-80 transition-opacity mb-3'
+              >
+                <Image
+                  src={REGULATORY_BODIES.sra.logoUrl}
+                  alt='SRA Logo'
+                  width={80}
+                  height={50}
+                  className='object-contain'
+                />
+              </Link>
+              <div>
+                <Link
+                  href={REGULATORY_BODIES.sra.url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='font-medium text-white hover:text-gold-400 transition-colors block mb-1'
+                >
+                  Solicitors Regulation Authority
+                </Link>
+                <p className='text-neutral-300'>
+                  {REGULATORY_BODIES.sra.number}
+                </p>
+                <p className='text-neutral-300 text-xs mt-1'>
+                  Regulated by the SRA
+                </p>
+              </div>
+            </div>
+
+            {/* ICO */}
+            <div className='flex flex-col items-center text-center'>
+              <Link
+                href={REGULATORY_BODIES.ico.url}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='block hover:opacity-80 transition-opacity mb-3'
+              >
+                <Image
+                  src={REGULATORY_BODIES.ico.logoUrl}
+                  alt='ICO Logo'
+                  width={80}
+                  height={50}
+                  className='object-contain'
+                />
+              </Link>
+              <div>
+                <Link
+                  href={REGULATORY_BODIES.ico.url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='font-medium text-white hover:text-gold-400 transition-colors block mb-1'
+                >
+                  Information Commissioner's Office
+                </Link>
+                <p className='text-neutral-300'>
+                  {REGULATORY_BODIES.ico.number}
+                </p>
+                <p className='text-neutral-300 text-xs mt-1'>
+                  Data Protection Registered
+                </p>
+              </div>
+            </div>
+
+            {/* Law Society */}
+            <div className='flex flex-col items-center text-center'>
+              <Link
+                href={REGULATORY_BODIES.lawSociety.url}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='block hover:opacity-80 transition-opacity mb-3'
+              >
+                <Image
+                  src={REGULATORY_BODIES.lawSociety.logoUrl}
+                  alt='Law Society Logo'
+                  width={80}
+                  height={50}
+                  className='object-contain'
+                />
+              </Link>
+              <div>
+                <Link
+                  href={REGULATORY_BODIES.lawSociety.url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='font-medium text-white hover:text-gold-400 transition-colors block mb-1'
+                >
+                  The Law Society
+                </Link>
+                <p className='text-neutral-300 text-xs mt-1'>
+                  Professional Membership
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className='border-t border-primary-700 pt-8'>
           <div className='flex flex-col md:flex-row justify-between items-center'>
             <p className='text-neutral-300 text-sm'>
               © 2025 Code Illustrated Labs. All rights reserved.
