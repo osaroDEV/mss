@@ -5,9 +5,7 @@ import {
   Mail,
   MapPin,
   Clock,
-  Shield,
-  Database,
-  Scale,
+  Linkedin
 } from 'lucide-react';
 import { type SiteSettings } from '@/lib/sanity';
 
@@ -26,13 +24,13 @@ const REGULATORY_BODIES = {
   ico: {
     name: "Information Commissioner's Office",
     url: 'https://ico.org.uk/ESDWebPages/Entry/ZA050265',
-    logoUrl: '/images/ico-logo-white.png', // Use white version for dark footer
+    logoUrl: '/images/ico-white.jpg', // Use white version for dark footer
     number: '[Your ICO Number]',
   },
   lawSociety: {
     name: 'The Law Society',
     url: 'https://solicitors.lawsociety.org.uk/search/results?Pro=True&Type=0&Name=MICHAEL_STEVENS_SOLICITORS',
-    logoUrl: '/images/law-society-logo-white.png', // Use white version for dark footer
+    logoUrl: '/images/tls-white.webp', // Use white version for dark footer
     number: 'England & Wales',
   },
 };
@@ -48,23 +46,19 @@ export default function Footer({ siteSettings }: FooterProps) {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
           {/* Company Info */}
           <div>
-            <div className='text-2xl font-bold mb-4'>
-              Michael Stevens
-              <span className='block text-lg font-normal text-gold-400'>
-                Solicitors
-              </span>
-            </div>
+            <Link href='/' className='flex items-center'>
+              <div className='text-2xl font-bold text-white'>
+                MichaelStevens
+                <span className='block text-gold-600 tracking-widest'>
+                  Solicitors
+                </span>
+              </div>
+              {/* <Image src={'/images/mss.svg'} alt='Michael Stevens Solicitors Logo' width={80} height={80} className='' /> */}
+            </Link>
             <p className='text-neutral-300 mb-4'>
               {siteSettings?.description ||
                 'Providing exceptional legal services with integrity, expertise, and personal attention.'}
             </p>
-            <div className='flex items-center text-sm text-neutral-300'>
-              <Clock className='h-4 w-4 mr-2' />
-              <span>
-                {legalNotices?.regulatoryInfo ||
-                  'Regulated by the Solicitors Regulation Authority'}
-              </span>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -197,6 +191,15 @@ export default function Footer({ siteSettings }: FooterProps) {
                   {contactInfo?.email || 'info@michaelstevenssolicitors.com'}
                 </a>
               </div>
+              <div className='flex items-center'>
+                <Linkedin className='h-5 w-5 mr-3 text-gold-400' />
+                <a
+                  href='https://www.linkedin.com/in/michael-stevens-solicitors-243498103?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
+                  className='text-[15px] text-neutral-300 hover:text-gold-400 transition-colors'
+                >
+                  LinkedIn
+                </a>
+              </div>
               <div className='flex items-start'>
                 <Clock className='h-5 w-5 mr-3 mt-0.5 text-gold-400' />
                 <div>
@@ -250,9 +253,9 @@ export default function Footer({ siteSettings }: FooterProps) {
                 >
                   Solicitors Regulation Authority
                 </Link>
-                <p className='text-neutral-300'>
+                {/* <p className='text-neutral-300'>
                   {REGULATORY_BODIES.sra.number}
-                </p>
+                </p> */}
                 <p className='text-neutral-300 text-xs mt-1'>
                   Regulated by the SRA
                 </p>
@@ -284,9 +287,9 @@ export default function Footer({ siteSettings }: FooterProps) {
                 >
                   Information Commissioner's Office
                 </Link>
-                <p className='text-neutral-300'>
+                {/* <p className='text-neutral-300'>
                   {REGULATORY_BODIES.ico.number}
-                </p>
+                </p> */}
                 <p className='text-neutral-300 text-xs mt-1'>
                   Data Protection Registered
                 </p>
@@ -304,8 +307,8 @@ export default function Footer({ siteSettings }: FooterProps) {
                 <Image
                   src={REGULATORY_BODIES.lawSociety.logoUrl}
                   alt='Law Society Logo'
-                  width={80}
-                  height={50}
+                  width={100}
+                  height={80}
                   className='object-contain'
                 />
               </Link>

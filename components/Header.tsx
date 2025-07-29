@@ -3,10 +3,10 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Menu, X, Phone, Mail } from 'lucide-react';
-import { HeaderSettings, SiteSettings } from '@/lib/sanity'
+import { HeaderSettings, SiteSettings } from '@/lib/sanity';
 
 interface HeaderProps {
-  siteSettings?: SiteSettings | null
+  siteSettings?: SiteSettings | null;
   headerSettings?: HeaderSettings | null; // Optional header settings
 }
 
@@ -19,18 +19,20 @@ export default function Header({ siteSettings, headerSettings }: HeaderProps) {
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
     { name: 'Contact', href: '/contact' },
-  ]
+  ];
 
   // Use siteSettings navigation or fallback
-  const navigation = siteSettings?.navigation?.map(item => ({
-    name: item.title,
-    href: item.url,
-    external: item.external
-  })) || fallbackNavigation.map(item => ({
-    name: item.name,
-    href: item.href,
-    external: false
-  }))
+  const navigation =
+    siteSettings?.navigation?.map((item) => ({
+      name: item.title,
+      href: item.url,
+      external: item.external,
+    })) ||
+    fallbackNavigation.map((item) => ({
+      name: item.name,
+      href: item.href,
+      external: false,
+    }));
 
   return (
     <header className='bg-white shadow-sm border-b border-neutral-200'>
@@ -44,14 +46,19 @@ export default function Header({ siteSettings, headerSettings }: HeaderProps) {
                 <a
                   href='tel:+447525181825'
                   className='text-[10px] md:text-base'
-                >{headerSettings?.contactInfo?.phone || '+44 (0) 75 2518 1825'}</a>
+                >
+                  {headerSettings?.contactInfo?.phone || '+44 (0) 75 2518 1825'}
+                </a>
               </div>
               <div className='flex items-center'>
                 <Mail className='h-4 w-4 mr-2' />
                 <a
                   href='mailto:info@michaelstevenssolicitors.com'
                   className='text-[10px] md:text-base'
-                >{headerSettings?.contactInfo?.email || 'info@michaelstevenssolicitors.com'}</a>
+                >
+                  {headerSettings?.contactInfo?.email ||
+                    'info@michaelstevenssolicitors.com'}
+                </a>
               </div>
             </div>
             {/* <div className='hidden md:block'>
@@ -67,8 +74,8 @@ export default function Header({ siteSettings, headerSettings }: HeaderProps) {
           <div className='flex justify-start lg:w-0 lg:flex-1'>
             <Link href='/' className='flex items-center'>
               <div className='text-2xl font-bold text-primary-800'>
-                Michael Stevens
-                <span className='block text-lg font-normal text-gold-600'>
+                MichaelStevens
+                <span className='block text-gold-600 tracking-widest'>
                   Solicitors
                 </span>
               </div>
@@ -96,7 +103,7 @@ export default function Header({ siteSettings, headerSettings }: HeaderProps) {
               href='/contact'
               className='bg-gold-600 hover:bg-gold-700 text-white px-6 py-2 rounded-md text-sm font-medium transition-colors duration-200'
             >
-             Consultation
+              Consultation
             </Link>
           </div>
 

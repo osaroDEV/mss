@@ -48,13 +48,13 @@ const REGULATORY_BODIES = {
   ico: {
     name: "Information Commissioner's Office",
     url: 'https://ico.org.uk/ESDWebPages/Entry/ZA050265',
-    logoUrl: '/images/ico-logo.png', // Replace with your actual logo path
+    logoUrl: '/images/ico-blue.jpg', // Replace with your actual logo path
     number: '[Your ICO Registration Number]',
   },
   lawSociety: {
     name: 'The Law Society of England & Wales',
     url: 'https://solicitors.lawsociety.org.uk/search/results?Pro=True&Type=0&Name=MICHAEL_STEVENS_SOLICITORS',
-    logoUrl: '/images/law-society-logo.png', // Replace with your actual logo path
+    logoUrl: '/images/tls-white.png', // Replace with your actual logo path
     number: 'Member of The Law Society',
   },
 };
@@ -244,7 +244,7 @@ export default async function About() {
                         src={REGULATORY_BODIES.lawSociety.logoUrl}
                         alt="Law Society Logo"
                         width={60}
-                        height={40}
+                        height={80}
                         className="object-contain"
                       />
                     </Link>

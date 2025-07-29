@@ -86,7 +86,6 @@ export default async function Testimonials() {
                   )}
                   <div>
                     <div className="font-semibold text-primary-800">{testimonial.author}</div>
-                    <div className="text-sm text-neutral-500">{testimonial.position}</div>
                   </div>
                 </div>
               </div>

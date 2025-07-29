@@ -1,5 +1,11 @@
 import Link from 'next/link';
-import { ArrowRight, Shield, Scale, Users, Award, ShieldCheck } from 'lucide-react';
+import Image from 'next/image';
+import {
+  ArrowRight,
+  Users,
+  Award,
+  ShieldCheck,
+} from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -17,9 +23,8 @@ export default function Hero() {
               Excellence in Legal Services
             </h1>
             <p className='md:text-xl text-neutral-200 mb-8 leading-relaxed'>
-              Michael Stevens Solicitors
-              provides comprehensive legal solutions for businesses and
-              individuals across London and beyond.
+              Michael Stevens Solicitors provides comprehensive legal solutions
+              for businesses and individuals across London and beyond.
             </p>
 
             <div className='flex flex-col sm:flex-row gap-4 mb-12'>
@@ -61,16 +66,13 @@ export default function Hero() {
           {/* Image placeholder */}
           <div className='animate-slide-up'>
             <div className='relative'>
-              <div className='aspect-[4/5] bg-gradient-to-br from-gold-400/20 to-primary-600/20 rounded-lg backdrop-blur-sm border border-white/10 flex items-center justify-center'>
-                <div className='text-center text-neutral-300'>
-                  <Scale className='h-24 w-24 mx-auto mb-4 opacity-50' />
-                  <p className='text-lg'>Professional Legal Team</p>
-                  <p className='text-sm'>Image placeholder</p>
-                </div>
-              </div>
-              {/* Decorative elements */}
-              <div className='absolute -top-4 -right-4 w-24 h-24 bg-gold-400/20 rounded-full blur-xl'></div>
-              <div className='absolute -bottom-4 -left-4 w-32 h-32 bg-primary-400/20 rounded-full blur-xl'></div>
+              <Image
+                src={'/images/lawyers.jpg'}
+                alt='Law Society Logo'
+                width={0}
+                height={0}
+                className='object-cover w-full h-[10%]'
+              />
             </div>
           </div>
         </div>
