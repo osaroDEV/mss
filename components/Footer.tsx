@@ -130,14 +130,6 @@ export default function Footer({ siteSettings }: FooterProps) {
               </li>
               <li>
                 <Link
-                  href='/services/family-law'
-                  className='text-neutral-300 hover:text-white transition-colors'
-                >
-                  Family Law
-                </Link>
-              </li>
-              <li>
-                <Link
                   href='/services/housing-landlord-and-tenants'
                   className='text-neutral-300 hover:text-white transition-colors'
                 >
@@ -146,10 +138,42 @@ export default function Footer({ siteSettings }: FooterProps) {
               </li>
               <li>
                 <Link
+                  href='/services/family-law'
+                  className='text-neutral-300 hover:text-white transition-colors'
+                >
+                  Family Law
+                </Link>
+              </li>
+              <li>
+                <Link
                   href='/services/wills-and-probate'
                   className='text-neutral-300 hover:text-white transition-colors'
                 >
                   Wills & Probate
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href='/services/document-legalisation'
+                  className='text-neutral-300 hover:text-white transition-colors'
+                >
+                  Document Legalisation
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href='/services/private-commercial-law'
+                  className='text-neutral-300 hover:text-white transition-colors'
+                >
+                  Private Commercial Law
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href='/services/charity-law'
+                  className='text-neutral-300 hover:text-white transition-colors'
+                >
+                  Charity Law
                 </Link>
               </li>
             </ul>

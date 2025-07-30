@@ -43,6 +43,8 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   Shield: LucideIcons.Shield,
   Gavel: LucideIcons.Gavel,
   BookOpen: LucideIcons.BookOpen,
+  HeartHandshake: LucideIcons.HeartHandshake,
+  PenTool: LucideIcons.PenTool,
   // Add more icons as needed
 }
 
