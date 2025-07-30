@@ -176,10 +176,10 @@ export default function Footer({ siteSettings }: FooterProps) {
               <div className='flex items-center'>
                 <Phone className='h-5 w-5 mr-3 text-gold-400' />
                 <a
-                  href='tel:+447525181825'
+                  href='tel:+442084693714'
                   className='text-neutral-300 hover:text-gold-400 transition-colors'
                 >
-                  {contactInfo?.phone || '+44 (0) 75 2518 1825'}
+                  {contactInfo?.phone || '+44 (0) 20 8469 3714'}
                 </a>
               </div>
               <div className='flex items-center'>

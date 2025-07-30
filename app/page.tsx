@@ -41,8 +41,8 @@ export default async function Home() {
                     <Phone className='h-5 w-5 text-gold-600 mr-3' />
                     <div>
                       <p className='font-medium'>Phone</p>
-                      <a href='tel:+447525181825' className='text-neutral-600'>
-                        {contactInfo?.phone || '+44 (0) 75 2518 1825'}
+                      <a href='+442084693714' className='text-neutral-600'>
+                        {contactInfo?.phone || '+44 (0) 20 8469 3714'}
                       </a>
                     </div>
                   </div>

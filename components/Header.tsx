@@ -44,10 +44,10 @@ export default function Header({ siteSettings, headerSettings }: HeaderProps) {
               <div className='flex items-center'>
                 <Phone className='h-4 w-4 mr-2' />
                 <a
-                  href='tel:+447525181825'
+                  href='tel:+442084693714'
                   className='text-[10px] md:text-base'
                 >
-                  {headerSettings?.contactInfo?.phone || '+44 (0) 75 2518 1825'}
+                  {headerSettings?.contactInfo?.phone || '+44 (0) 20 8469 3714'}
                 </a>
               </div>
               <div className='flex items-center'>
