@@ -24,8 +24,8 @@ export default async function Home() {
               Get Expert Legal Advice
             </h2>
             <p className='text-xl text-neutral-600 max-w-3xl mx-auto'>
-              Ready to discuss your legal matter? Contact us today for a free
-              consultation.
+              Ready to discuss your legal matter? Contact us for
+              consultations.
             </p>
           </div>
 

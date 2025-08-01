@@ -333,7 +333,7 @@ export default async function ServicePage({
             {/* Detailed Description */}
             {service.detailedDescription &&
               service.detailedDescription.length > 0 && (
-                <div className='prose prose-lg max-w-none mb-12'>
+                <div className='prose prose-lg max-w-none mb-12 text-lg md:text-2xl'>
                   <PortableText
                     value={service.detailedDescription}
                     components={portableTextComponents}

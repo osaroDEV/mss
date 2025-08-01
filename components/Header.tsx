@@ -74,10 +74,7 @@ export default function Header({ siteSettings, headerSettings }: HeaderProps) {
           <div className='flex justify-start lg:w-0 lg:flex-1'>
             <Link href='/' className='flex items-center'>
               <div className='text-2xl font-bold text-primary-800'>
-                MichaelStevens
-                <span className='block text-gold-600 tracking-widest'>
-                  Solicitors
-                </span>
+                Michael Stevens Solicitors
               </div>
               {/* <Image src={'/images/mss.svg'} alt='Michael Stevens Solicitors Logo' width={80} height={80} className='' /> */}
             </Link>

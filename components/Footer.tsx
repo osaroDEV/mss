@@ -47,11 +47,8 @@ export default function Footer({ siteSettings }: FooterProps) {
           {/* Company Info */}
           <div>
             <Link href='/' className='flex items-center'>
-              <div className='text-2xl font-bold text-white'>
-                MichaelStevens
-                <span className='block text-gold-600 tracking-widest'>
-                  Solicitors
-                </span>
+              <div className='text-[20px] font-bold text-white mb-5'>
+                Michael Stevens Solicitors
               </div>
               {/* <Image src={'/images/mss.svg'} alt='Michael Stevens Solicitors Logo' width={80} height={80} className='' /> */}
             </Link>
@@ -360,7 +357,7 @@ export default function Footer({ siteSettings }: FooterProps) {
             </p>
             <div className='flex space-x-6 mt-4 md:mt-0'>
               <Link
-                href='/privacy'
+                href='/privacy-policy'
                 className='text-neutral-300 hover:text-white text-sm transition-colors'
               >
                 Privacy Policy
