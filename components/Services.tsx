@@ -267,17 +267,14 @@ export default async function Services() {
                   </div>
                 )}
                 <div className="flex items-center mb-6">
-                  <div className="bg-primary-100 group-hover:bg-primary-200 transition-colors duration-300 rounded-lg p-3">
-                    <IconComponent className="h-6 w-6 md:h-8 md:w-8 text-primary-700" />
-                  </div>
                 </div>
                 <h3 className="md:text-xl font-semibold text-primary-800 mb-3">{service.title}</h3>
-                <p className="text-sm md:text-lg text-neutral-600 mb-6">{service.shortDescription}</p>
+                <p className="text-sm md:text-lg mb-6">{service.shortDescription}</p>
                 {/* Features list */}
                 {service.features && service.features.length > 0 && (
                   <ul className="space-y-2 mb-6">
                     {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-sm text-neutral-500">
+                      <li key={featureIndex} className="flex items-center text-base">
                         <div className="w-1.5 h-1.5 bg-gold-500 rounded-full mr-3"></div>
                         {feature}
                       </li>

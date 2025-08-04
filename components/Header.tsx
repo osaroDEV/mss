@@ -88,21 +88,21 @@ export default function Header({ siteSettings, headerSettings }: HeaderProps) {
                 href={item.href}
                 target={item.external ? '_blank' : undefined}
                 rel={item.external ? 'noopener noreferrer' : undefined}
-                className='text-neutral-700 hover:text-primary-800 px-3 py-2 text-sm font-medium transition-colors duration-200'
+                className='text-neutral-700 md:text-xl hover:text-primary-800 px-3 py-2 text-sm font-medium transition-colors duration-200'
               >
                 {item.name}
               </Link>
             ))}
           </div>
 
-          <div className='hidden md:flex items-center justify-end lg:w-0 lg:flex-1'>
+          {/* <div className='hidden md:flex items-center justify-end lg:w-0 lg:flex-1'>
             <Link
               href='/contact'
               className='bg-gold-600 hover:bg-gold-700 text-white px-6 py-2 rounded-md text-sm font-medium transition-colors duration-200'
             >
               Consultation
             </Link>
-          </div>
+          </div> */}
 
           {/* Mobile menu button */}
           <div className='md:hidden'>

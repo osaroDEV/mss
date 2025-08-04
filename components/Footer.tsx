@@ -43,23 +43,10 @@ export default function Footer({ siteSettings }: FooterProps) {
   return (
     <footer className='bg-primary-800 text-white'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
-          {/* Company Info */}
-          <div>
-            <Link href='/' className='flex items-center'>
-              <div className='text-[20px] font-bold text-white mb-5'>
-                Michael Stevens Solicitors
-              </div>
-              {/* <Image src={'/images/mss.svg'} alt='Michael Stevens Solicitors Logo' width={80} height={80} className='' /> */}
-            </Link>
-            <p className='text-neutral-300 mb-4'>
-              {siteSettings?.description ||
-                'Providing exceptional legal services with integrity, expertise, and personal attention.'}
-            </p>
-          </div>
+        <div className='flex flex-col sm:flex-row justify-between items-baseline space-y-8 lg:space-y-0 lg:space-x-12'>         
 
           {/* Quick Links */}
-          <div>
+          <div className='flex-1'>
             <h3 className='text-lg font-semibold mb-4'>Quick Links</h3>
             <ul className='space-y-2'>
               <li>
@@ -98,7 +85,7 @@ export default function Footer({ siteSettings }: FooterProps) {
           </div>
 
           {/* Practice Areas */}
-          <div>
+          <div className='flex-1'>
             <h3 className='text-lg font-semibold mb-4'>Practice Areas</h3>
             <ul className='space-y-2'>
               <li>
@@ -177,7 +164,7 @@ export default function Footer({ siteSettings }: FooterProps) {
           </div>
 
           {/* Contact Info */}
-          <div>
+          <div className='flex-1'>
             <h3 className='text-lg font-semibold mb-4'>Contact Information</h3>
             <div className='space-y-3'>
               <div className='flex items-start'>
