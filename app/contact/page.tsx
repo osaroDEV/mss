@@ -40,11 +40,11 @@ const page = async () => {
                   <div>
                     <p className='font-medium'>Email</p>
                     <a
-                      href='mailto:info@michaelstevenssolicitors.co.uk'
+                      href='mailto:info@michaelstevenssolicitors.com'
                       className='text-neutral-600'
                     >
                       {contactInfo?.email ||
-                        'info@michaelstevenssolicitors.co.uk'}
+                        'info@michaelstevenssolicitors.com'}
                     </a>
                   </div>
                 </div>

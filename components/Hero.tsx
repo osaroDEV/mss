@@ -111,7 +111,7 @@ export default async function Hero() {
             src={heroImageUrl || "/placeholder.svg"}
             alt={data.mainHeading || "Lawyers in office"}
             fill
-            className="object-cover"
+            className="object-contain"
             priority
           />
         </div>

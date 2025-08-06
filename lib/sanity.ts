@@ -1,16 +1,17 @@
-import { createClient } from '@sanity/client'
-import imageUrlBuilder from '@sanity/image-url'
+import { createClient } from "@sanity/client"
+import imageUrlBuilder from "@sanity/image-url"
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
 
 export const client = createClient({
   projectId: '79kq4upu',
   dataset: 'production',
   useCdn: false, // This is key - set to false for latest content
-  apiVersion: '2024-01-01', // Use current date for API version
+  apiVersion: '2025-08-05', // Use current date for API version
 })
 
 const builder = imageUrlBuilder(client)
 
-export function urlFor(source: any) {
+export function urlFor(source: SanityImageSource) {
   return builder.image(source)
 }
 
@@ -18,20 +19,9 @@ export function urlFor(source: any) {
 export interface SanityImage {
   asset: {
     _ref: string
-    _type: 'reference'
+    _type: "reference"
   }
   alt?: string
-}
-
-export interface TeamMember {
-  _id: string
-  name: string
-  position: string
-  bio: string
-  image: SanityImage
-  email: string
-  phone: string
-  specializations: string[]
 }
 
 export interface Service {
@@ -44,23 +34,24 @@ export interface Service {
   features: string[]
 }
 
-export interface BlogPost {
-  _id: string
+export interface NavItem {
+  _key: string
   title: string
-  slug: { current: string }
-  excerpt: string
-  content: any[] // Portable Text
-  image: SanityImage
-  author: TeamMember
-  publishedAt: string
-  categories: string[]
+  url: string
+  external: boolean
+}
+
+export interface ContactInfo {
+  phone: string
+  email: string
 }
 
 export interface HeaderSettings {
-   contactInfo: {
-    phone: string
-    email: string}
-  }
+  _id: string
+  _type: "headerSettings"
+  contactInfo: ContactInfo
+}
+
 export interface PageContent {
   _id: string
   title: string
@@ -76,14 +67,7 @@ export interface SiteSettings {
   contactInfo: {
     phone: string
     email: string
-    emergencyPhone?: string
-    address: {
-      street: string
-      city: string
-      state?: string
-      postalCode: string
-      country: string
-    }
+    address: string
     hours: Array<{
       days: string
       hours: string
@@ -124,6 +108,82 @@ export interface SiteSettings {
 // Function to get site settings
 export async function getSiteSettings(): Promise<SiteSettings | null> {
   const query = `*[_type == "siteSettings"][0]{
+    contactInfo{
+      phone,
+      email,
+      address,
+      hours[]{
+        days,
+        hours
+      }
+    },
+    socialMedia{
+      linkedin,
+      twitter,
+      facebook,
+      instagram,
+      youtube
+    },
+    navigation[]{
+      title,
+      url,
+      external
+    },
+    footerText,
+    legalNotices{
+      privacyPolicy,
+      termsOfService,
+      cookiePolicy,
+      regulatoryInfo
+    },
+    analytics{
+      googleAnalyticsId,
+      googleTagManagerId
+    },
+    seo{
+      metaTitle,
+      metaDescription,
+      keywords,
+      ogImage{
+        asset,
+        alt
+      },
+      noIndex
+    }
+  }`
+
+  try {
+    const data = await client.fetch(query)
+    return data || null
+  } catch (error) {
+    console.error("Error fetching site settings:", error)
+    return null
+  }
+}
+
+// Function to fetch header settings
+export async function getHeaderSettings(): Promise<HeaderSettings | null> {
+  const query = `*[_type == "headerSettings"][0]{
+    contactInfo{
+      phone,
+      email
+    }
+  }`
+  try {
+    const data = await client.fetch(query)
+    return data || null
+  } catch (error) {
+    console.error("Error fetching header settings:", error)
+    return null
+  }
+}
+
+// Merged function to get site and header settings
+export async function getSiteAndHeaderSettings(): Promise<{
+  site: SiteSettings | null
+  header: HeaderSettings | null
+}> {
+  const siteQuery = `*[_type == "siteSettings"][0]{
     _id,
     title,
     description,
@@ -186,11 +246,18 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
     }
   }`
 
+  const headerQuery = `*[_type == "headerSettings"]{
+    contactInfo{
+      phone,
+      email
+    }
+  }`
+
   try {
-    const data = await client.fetch(query)
-    return data || null
+    const [site, header] = await Promise.all([client.fetch(siteQuery), client.fetch(headerQuery)])
+    return { site: site || null, header: header || null }
   } catch (error) {
-    console.error('Error fetching site settings:', error)
-    return null
+    console.error("Error fetching site or header settings:", error)
+    return { site: null, header: null }
   }
 }

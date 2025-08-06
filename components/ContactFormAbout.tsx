@@ -152,12 +152,7 @@ export default function ContactForm() {
 
       <div className="pt-4 border-t border-slate-600">
         <p className="text-xs text-slate-400 leading-relaxed">
-          This data will only be used by Irwin Mitchell for processing your enquiry and will not be shared with any
-          third parties. For more information about how we use your data, please see our{" "}
-          <a href="#" className="text-slate-300 underline hover:text-white">
-            privacy policy
-          </a>
-          .
+           By submitting this form, you agree that we may contact you regarding your inquiry. All communications are confidential and subject to solicitor-client privilege.
         </p>
       </div>
     </form>

@@ -292,7 +292,6 @@ export default async function Services() {
             )
           })}
         </div>
-        {/* Conditionally rendered "View All Services" button */}
         <ViewAllServicesButton />
       </div>
     </section>

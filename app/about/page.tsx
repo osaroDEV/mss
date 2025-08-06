@@ -96,7 +96,7 @@ export default async function AboutPage() {
         </div>
       </section>
       {/* Main Content Section - Two Column Layout */}
-      <section className="py-16 bg-white px-10">
+      <section className="py-16 bg-white px-2 md:px-10 border">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
             {/* Left Column - Content */}

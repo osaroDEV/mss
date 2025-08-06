@@ -315,9 +315,9 @@ export default async function ServicePage({
           <div className='lg:col-span-2'>
             {/* Service Icon and Title */}
             <div className='flex items-center gap-4 mb-8'>
-              <div className='bg-primary-100 rounded-xl p-3 flex-shrink-0'>
+              {/* <div className='bg-primary-100 rounded-xl p-3 flex-shrink-0'>
                 <IconComponent className='h-8 w-8 text-primary-700' />
-              </div>
+              </div> */}
               <div>
                 <h2 className='text-2xl font-bold text-gray-900'>
                   Service Overview
