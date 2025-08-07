@@ -17,14 +17,6 @@ jobs:
           curl -X DELETE "https://api.vercel.com/v1/projects/${{ secrets.VERCEL_PROJECT_ID }}/domains/${{ secrets.VERCEL_DOMAIN }}/cache" \
             -H "Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}"
 
-      - name: Purge CDN Cache (if using Cloudflare)
-        if: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-        run: |
-          curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
-            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            --data '{"purge_everything":true}'
-
       - name: Wait for cache clear
         run: sleep 15
 
