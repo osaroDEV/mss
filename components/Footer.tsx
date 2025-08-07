@@ -261,7 +261,7 @@ export default function Footer({ siteSettings, services }: FooterProps) {
         <div className='border-t border-primary-700 pt-8'>
           <div className='flex flex-col md:flex-row justify-between items-center'>
             <p className='text-neutral-300 text-sm'>
-              © 2025 Code Illustrated Labs. All rights reserved.
+              © 2025 Michael Stevens Solicitors. All rights reserved. Website by <a href="https://codeillustrated.com/labs" className='underline' target="_blank" rel="noopener noreferrer">Code Illustrated Labs</a>
             </p>
             <div className='flex space-x-6 mt-4 md:mt-0'>
               <Link

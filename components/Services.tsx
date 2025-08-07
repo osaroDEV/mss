@@ -1,8 +1,8 @@
 import type React from "react"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight } from 'lucide-react'
 import * as LucideIcons from "lucide-react"
-import { client } from "@/lib/sanity"
+import { client, getSiteSettings } from "@/lib/sanity" // Import getSiteSettings
 import ViewAllServicesButton from "./ViewAllServicesBtn"
 
 // Define the types for our Sanity data
@@ -237,6 +237,9 @@ const fallbackServices: Service[] = [
 
 export default async function Services() {
   const sanityServices = await getServicesData()
+  const siteSettings = await getSiteSettings() // Fetch site settings here
+  const servicesInfo = siteSettings?.serviceInfo;
+  const { servicePageTitle, servicePageDescription } = servicesInfo || {};
   // Use Sanity data if available, otherwise use fallback data
   const services = sanityServices.length > 0 ? sanityServices : fallbackServices
   const isUsingSanityData = sanityServices.length > 0
@@ -245,10 +248,8 @@ export default async function Services() {
     <section className="py-16 lg:py-24 bg-neutral-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-800 mb-4">Our Practice Areas</h2>
-          <p className="md:text-xl text-neutral-600 max-w-3xl mx-auto">
-            We provide comprehensive legal services across multiple practice areas, delivering expert advice and
-            exceptional results for our clients.
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-800 mb-4">{servicePageTitle || "Our Practice Areas"}</h2>
+          <p className="md:text-xl text-neutral-600 max-w-3xl mx-auto">{servicePageDescription || "We provide comprehensive legal services across multiple practice areas, delivering expert advice and exceptional results for our clients."}
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -269,12 +270,12 @@ export default async function Services() {
                 <div className="flex items-center mb-6">
                 </div>
                 <h3 className="md:text-xl font-semibold text-primary-800 mb-3">{service.title}</h3>
-                <p className="text-sm md:text-lg mb-6">{service.shortDescription}</p>
+                <p className="md:text-lg mb-6">{service.shortDescription}</p>
                 {/* Features list */}
                 {service.features && service.features.length > 0 && (
                   <ul className="space-y-2 mb-6">
                     {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-base">
+                      <li key={featureIndex} className="flex items-center">
                         <div className="w-1.5 h-1.5 bg-gold-500 rounded-full mr-3"></div>
                         {feature}
                       </li>

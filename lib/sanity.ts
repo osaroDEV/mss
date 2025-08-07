@@ -28,10 +28,14 @@ export interface Service {
   _id: string
   title: string
   slug: { current: string }
-  description: string
-  longDescription: string
-  image: SanityImage
+  shortDescription: string
+  detailedDescription: any[] // Rich text blocks from Sanity
+  icon: string
   features: string[]
+  benefits?: string[]
+  processSteps?: { step: number; title: string; description: string }[]
+  featured: boolean
+  order: number
 }
 
 export interface NavItem {
@@ -44,6 +48,16 @@ export interface NavItem {
 export interface ContactInfo {
   phone: string
   email: string
+  address: string
+  hours: Array<{
+    days: string
+    hours: string
+  }>
+}
+
+export interface ServiceInfo {
+  servicePageTitle: string
+  servicePageDescription: string
 }
 
 export interface HeaderSettings {
@@ -64,15 +78,8 @@ export interface SiteSettings {
   description: string
   logo?: SanityImage
   favicon?: SanityImage
-  contactInfo: {
-    phone: string
-    email: string
-    address: string
-    hours: Array<{
-      days: string
-      hours: string
-    }>
-  }
+  contactInfo: ContactInfo
+  serviceInfo: ServiceInfo // Added serviceInfo to SiteSettings interface
   socialMedia?: {
     linkedin?: string
     twitter?: string
@@ -116,6 +123,10 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
         days,
         hours
       }
+    },
+    serviceInfo { // Fetch serviceInfo
+      servicePageTitle,
+      servicePageDescription,
     },
     socialMedia{
       linkedin,
@@ -161,7 +172,7 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
   }
 }
 
-// Function to fetch header settings
+// Function to fetch header settings (kept for compatibility, though Header now uses getSiteSettings)
 export async function getHeaderSettings(): Promise<HeaderSettings | null> {
   const query = `*[_type == "headerSettings"][0]{
     contactInfo{
@@ -178,7 +189,7 @@ export async function getHeaderSettings(): Promise<HeaderSettings | null> {
   }
 }
 
-// Merged function to get site and header settings
+// Merged function to get site and header settings (kept for compatibility)
 export async function getSiteAndHeaderSettings(): Promise<{
   site: SiteSettings | null
   header: HeaderSettings | null
@@ -210,6 +221,10 @@ export async function getSiteAndHeaderSettings(): Promise<{
         days,
         hours
       }
+    },
+    serviceInfo { // Fetch serviceInfo in merged query too
+      servicePageTitle,
+      servicePageDescription,
     },
     socialMedia{
       linkedin,
