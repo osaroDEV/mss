@@ -39,7 +39,7 @@ export default function Footer({ siteSettings, services }: FooterProps) {
   return (
     <footer className='bg-primary-800 text-white'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
-        <div className='flex flex-col sm:flex-row justify-between items-baseline space-y-8 lg:space-y-0 lg:space-x-12'>         
+        <div className='flex flex-col sm:flex-row justify-between items-baseline space-y-8 lg:space-y-0 lg:space-x-12 mb-10'>         
 
           {/* Quick Links */}
           <div className='flex-1'>
@@ -68,6 +68,33 @@ export default function Footer({ siteSettings, services }: FooterProps) {
                 </>
               )}
             </ul>
+            {/* SRA */}
+            <div className='flex flex-col items-center text-center border mt-5 w-[200px]'>
+              <Link
+                href={REGULATORY_BODIES.sra.url}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='block hover:opacity-80 transition-opacity mb-3'
+              >
+                <Image
+                  src={REGULATORY_BODIES.sra.logoUrl || "/placeholder.svg"}
+                  alt='SRA Logo'
+                  width={120}
+                  height={50}
+                  className='object-contain'
+                />
+              </Link>
+              <div>
+                <Link
+                  href={REGULATORY_BODIES.sra.url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='font-medium hover:text-[rgba(0,0,0,0.5)]  transition-colors block mb-1'
+                >
+                  Solicitors Regulation Authority
+                </Link>
+              </div>
+            </div>
           </div>
 
           {/* Practice Areas */}
@@ -88,7 +115,7 @@ export default function Footer({ siteSettings, services }: FooterProps) {
               ) : (
                 // Fallback for Practice Areas if no data from Sanity
                 <>
-                  <li><Link href='/services/immigration-law' className='text-neutral-300 hover:text-white transition-colors'>Immigration Law</Link></li>
+                  <li><Link href='/services/immigration-law' className='text-neutral-300 hover:text-white transition-colors'>Immigration Lawx</Link></li>
                   <li><Link href='/services/business-migration' className='text-neutral-300 hover:text-white transition-colors'>Business Migration</Link></li>
                   <li><Link href='/services/employment-matters' className='text-neutral-300 hover:text-white transition-colors'>Employment Matters</Link></li>
                   <li><Link href='/services/housing-landlord-and-tenants' className='text-neutral-300 hover:text-white transition-colors'>Housing- Landlord & Tenants</Link></li>
@@ -166,102 +193,10 @@ export default function Footer({ siteSettings, services }: FooterProps) {
           </div>
         </div>
 
-        {/* Regulatory Information Section */}
-        <div className='border-t border-primary-700 mt-8 pt-8 mb-8'>
-          <h3 className='text-lg font-semibold mb-6 text-gold-400'>
-            Regulatory Information
-          </h3>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-8 text-sm'>
-            {/* SRA */}
-            <div className='flex flex-col items-center text-center'>
-              <Link
-                href={REGULATORY_BODIES.sra.url}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='block hover:opacity-80 transition-opacity mb-3'
-              >
-                <Image
-                  src={REGULATORY_BODIES.sra.logoUrl || "/placeholder.svg"}
-                  alt='SRA Logo'
-                  width={80}
-                  height={50}
-                  className='object-contain'
-                />
-              </Link>
-              <div>
-                <Link
-                  href={REGULATORY_BODIES.sra.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='font-medium text-white hover:text-gold-400 transition-colors block mb-1'
-                >
-                  Solicitors Regulation Authority
-                </Link>
-              </div>
-            </div>
-
-            {/* ICO */}
-            <div className='flex flex-col items-center text-center'>
-              <Link
-                href={REGULATORY_BODIES.ico.url}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='block hover:opacity-80 transition-opacity mb-3'
-              >
-                <Image
-                  src={REGULATORY_BODIES.ico.logoUrl || "/placeholder.svg"}
-                  alt='ICO Logo'
-                  width={80}
-                  height={50}
-                  className='object-contain'
-                />
-              </Link>
-              <div>
-                <Link
-                  href={REGULATORY_BODIES.ico.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='font-medium text-white hover:text-gold-400 transition-colors block mb-1'
-                >
-                  Information Commissioner's Office
-                </Link>
-              </div>
-            </div>
-
-            {/* Law Society */}
-            <div className='flex flex-col items-center text-center'>
-              <Link
-                href={REGULATORY_BODIES.lawSociety.url}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='block hover:opacity-80 transition-opacity mb-3'
-              >
-                <Image
-                  src={REGULATORY_BODIES.lawSociety.logoUrl || "/placeholder.svg"}
-                  alt='Law Society Logo'
-                  width={100}
-                  height={80}
-                  className='object-contain'
-                />
-              </Link>
-              <div>
-                <Link
-                  href={REGULATORY_BODIES.lawSociety.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='font-medium text-white hover:text-gold-400 transition-colors block mb-1'
-                >
-                  The Law Society
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className='border-t border-primary-700 pt-8'>
           <div className='flex flex-col md:flex-row justify-between items-center'>
             <p className='text-neutral-300 text-sm'>
-              © 2025 Michael Stevens Solicitors. All rights reserved. Website by <a href="https://codeillustrated.com/labs" className='underline' target="_blank" rel="noopener noreferrer">Code Illustrated Labs</a>
+              © {new Date().getFullYear()} Michael Stevens Solicitors. All rights reserved. Website by <a href="https://codeillustrated.com/labs" className='underline' target="_blank" rel="noopener noreferrer">Code Illustrated Labs</a>
             </p>
             <div className='flex space-x-6 mt-4 md:mt-0'>
               <Link

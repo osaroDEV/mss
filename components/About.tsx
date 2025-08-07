@@ -4,6 +4,29 @@ import { client, urlFor } from "@/lib/sanity"
 import ContactForm from "@/components/ContactFormAbout" 
 import PortableTextRenderer from "@/components/PortableTextRenderer"
 import * as LucideIcons from "lucide-react"
+import Link from "next/link"
+
+// Regulatory bodies configuration
+const REGULATORY_BODIES = {
+  sra: {
+    name: 'Solicitors Regulation Authority',
+    url: 'https://www.sra.org.uk/consumers/register/organisation/?sraNumber=625253&prevSearchText=michael%20stevens%20solicitors&prevSearchFilter=',
+    logoUrl: '/images/sra-logo-white.png', // Use white version for dark footer
+    number: '[Your SRA Number]',
+  },
+  ico: {
+    name: "Information Commissioner's Office",
+    url: 'https://ico.org.uk/ESDWebPages/Entry/ZA050265',
+    logoUrl: '/images/ico-blue.jpg', // Use white version for dark footer
+    number: '[Your ICO Number]',
+  },
+  lawSociety: {
+    name: 'The Law Society',
+    url: 'https://solicitors.lawsociety.org.uk/search/results?Pro=True&Type=0&Name=MICHAEL_STEVENS_SOLICITORS',
+    logoUrl: '/images/tls-white.webp', // Use white version for dark footer
+    number: 'England & Wales',
+  },
+};
 
 // Define the types for our Sanity data
 interface Achievement {
@@ -126,6 +149,97 @@ export default async function About() {
                     <h2 className="text-3xl font-bold text-gray-900 mb-6">{data.contactUsTitle}</h2>
                     <PortableTextRenderer content={data.contactUsContent} />
                   </div>
+                  {/* Regulatory Information Section */}
+        <div className='border-t border-primary-700 mt-8 pt-8 mb-8'>
+          <h3 className='text-2xl font-bold text-gray-900 mb-6'>
+            Regulatory Information
+          </h3>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-8 text-sm'>
+            {/* SRA */}
+            <div className='flex flex-col items-center text-center'>
+              <Link
+                href={REGULATORY_BODIES.sra.url}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='block hover:opacity-80 transition-opacity mb-3'
+              >
+                <Image
+                  src={REGULATORY_BODIES.sra.logoUrl || "/placeholder.svg"}
+                  alt='SRA Logo'
+                  width={120}
+                  height={50}
+                  className='object-contain'
+                />
+              </Link>
+              <div>
+                <Link
+                  href={REGULATORY_BODIES.sra.url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='font-medium hover:text-[rgba(0,0,0,0.5)]  transition-colors block mb-1'
+                >
+                  Solicitors Regulation Authority
+                </Link>
+              </div>
+            </div>
+
+            {/* ICO */}
+            <div className='flex flex-col items-center text-center'>
+              <Link
+                href={REGULATORY_BODIES.ico.url}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='font-medium hover:text-[rgba(0,0,0,0.5)]  transition-colors block mb-1'
+              >
+                <Image
+                  src={REGULATORY_BODIES.ico.logoUrl || "/placeholder.svg"}
+                  alt='ICO Logo'
+                  width={120}
+                  height={50}
+                  className='object-contain'
+                />
+              </Link>
+              <div>
+                <Link
+                  href={REGULATORY_BODIES.ico.url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='font-medium hover:text-[rgba(0,0,0,0.5)]  transition-colors block mb-1'
+                >
+                  Information Commissioner's Office
+                </Link>
+              </div>
+            </div>
+
+            {/* Law Society */}
+            <div className='flex flex-col items-center text-center'>
+              <Link
+                href={REGULATORY_BODIES.lawSociety.url}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='block hover:opacity-80 transition-opacity mb-3'
+              >
+                <Image
+                  src={REGULATORY_BODIES.lawSociety.logoUrl || "/placeholder.svg"}
+                  alt='Law Society Logo'
+                  width={160}
+                  height={80}
+                  className='object-contain'
+                />
+              </Link>
+              <div>
+                <Link
+                  href={REGULATORY_BODIES.lawSociety.url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='font-medium hover:text-[rgba(0,0,0,0.5)] transition-colors block mb-1'
+                >
+                  The Law Society
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
                 </div>
                 {/* Right Column - Contact Form */}
                 <div className="lg:col-span-1">

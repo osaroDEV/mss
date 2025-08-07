@@ -2,7 +2,7 @@ import "./globals.css"
 import { Inter } from "next/font/google"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
-import { getSiteSettings } from "@/lib/sanity"
+import { getSiteSettings, getServicesData } from "@/lib/sanity"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -27,14 +27,15 @@ export async function generateMetadata() {
 import { ReactNode } from "react"
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-  const siteSettings = await getSiteSettings()
+   // Fetch both site settings and services data in parallel
+  const [siteSettings, services] = await Promise.all([getSiteSettings(), getServicesData()])
   return (
     <html lang="en">
       <body className={inter.className}>
         {/* Removed siteSettings prop from Header */}
         <Header />
         <main>{children}</main>
-        <Footer siteSettings={siteSettings} />
+        <Footer siteSettings={siteSettings} services={services} />
       </body>
     </html>
   )

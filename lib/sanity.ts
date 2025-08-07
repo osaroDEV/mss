@@ -172,6 +172,24 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
   }
 }
 
+// lib/sanity.ts
+export async function getServicesData(): Promise<Service[]> {
+  const query = `*[_type == "service"] | order(order asc, title asc) {
+    _id,
+    title,
+    slug,
+    order
+  }`
+  try {
+    const data = await client.fetch(query)
+    console.log("Fetched services for footer:", data) // Add this line
+    return data || []
+  } catch (error) {
+    console.error("Error fetching services data:", error)
+    return []
+  }
+}
+
 // Function to fetch header settings (kept for compatibility, though Header now uses getSiteSettings)
 export async function getHeaderSettings(): Promise<HeaderSettings | null> {
   const query = `*[_type == "headerSettings"][0]{

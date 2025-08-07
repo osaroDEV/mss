@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import ContactForm from "@/components/ContactFormAbout" 
 import { client, urlFor } from "@/lib/sanity"
 import PortableTextRenderer from "@/components/PortableTextRenderer"
+import Link from "next/link"
 
 // Define a type for the fetched data
 interface AboutPageData {
@@ -121,6 +122,7 @@ export default async function AboutPage() {
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">{data.contactUsTitle}</h2>
                 <PortableTextRenderer content={data.contactUsContent} />
               </div>
+              
             </div>
             {/* Right Column - Contact Form */}
             <div className="lg:col-span-1">
