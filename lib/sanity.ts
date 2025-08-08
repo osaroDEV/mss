@@ -60,6 +60,19 @@ export interface ServiceInfo {
   servicePageDescription: string
 }
 
+export interface LegalNoticeItem { // Updated interface for legal notice objects
+  title: string;
+  image?: SanityImage;
+  content?: any[]; // Added content for Portable Text
+  externalUrl?: string; // Renamed from 'url' to clarify it's for external links
+}
+
+export interface LegalNotices { // Updated LegalNotices interface
+  privacySecurity?: LegalNoticeItem;
+  termsConditions?: LegalNoticeItem;
+  complaintsProcedure?: LegalNoticeItem;
+}
+
 export interface HeaderSettings {
   _id: string
   _type: "headerSettings"
@@ -93,12 +106,7 @@ export interface SiteSettings {
     external: boolean
   }>
   footerText?: any[] // Portable Text
-  legalNotices?: {
-    privacyPolicy?: string
-    termsOfService?: string
-    cookiePolicy?: string
-    regulatoryInfo?: string
-  }
+  legalNotices?: LegalNotices // Use the updated LegalNotices interface
   analytics?: {
     googleAnalyticsId?: string
     googleTagManagerId?: string
@@ -128,6 +136,26 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
       servicePageTitle,
       servicePageDescription,
     },
+   legalNotices{ // Fetch legal notices with nested title, image, content, and externalUrl
+      privacySecurity{
+        title,
+        image{asset,alt},
+        content,
+        externalUrl
+      },
+      termsConditions{
+        title,
+        image{asset,alt},
+        content,
+        externalUrl
+      },
+      complaintsProcedure{
+        title,
+        image{asset,alt},
+        content,
+        externalUrl
+      }
+    },
     socialMedia{
       linkedin,
       twitter,
@@ -141,12 +169,6 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
       external
     },
     footerText,
-    legalNotices{
-      privacyPolicy,
-      termsOfService,
-      cookiePolicy,
-      regulatoryInfo
-    },
     analytics{
       googleAnalyticsId,
       googleTagManagerId
@@ -243,6 +265,26 @@ export async function getSiteAndHeaderSettings(): Promise<{
     serviceInfo { // Fetch serviceInfo in merged query too
       servicePageTitle,
       servicePageDescription,
+    },
+   legalNotices{
+      privacySecurity{
+        title,
+        image{asset,alt},
+        content,
+        externalUrl
+      },
+      termsConditions{
+        title,
+        image{asset,alt},
+        content,
+        externalUrl
+      },
+      complaintsProcedure{
+        title,
+        image{asset,alt},
+        content,
+        externalUrl
+      }
     },
     socialMedia{
       linkedin,

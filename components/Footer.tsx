@@ -69,7 +69,8 @@ export default function Footer({ siteSettings, services }: FooterProps) {
               )}
             </ul>
             {/* SRA */}
-            <div className='flex flex-col items-center text-center border mt-5 w-[200px]'>
+            <div className='border mt-5 w-[200px]'>
+              <h3 className='text-lg font-semibold mb-4'>SRA Regulated</h3>
               <Link
                 href={REGULATORY_BODIES.sra.url}
                 target='_blank'
@@ -84,16 +85,6 @@ export default function Footer({ siteSettings, services }: FooterProps) {
                   className='object-contain'
                 />
               </Link>
-              <div>
-                <Link
-                  href={REGULATORY_BODIES.sra.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='font-medium hover:text-[rgba(0,0,0,0.5)]  transition-colors block mb-1'
-                >
-                  Solicitors Regulation Authority
-                </Link>
-              </div>
             </div>
           </div>
 
@@ -115,15 +106,33 @@ export default function Footer({ siteSettings, services }: FooterProps) {
               ) : (
                 // Fallback for Practice Areas if no data from Sanity
                 <>
-                  <li><Link href='/services/immigration-law' className='text-neutral-300 hover:text-white transition-colors'>Immigration Lawx</Link></li>
-                  <li><Link href='/services/business-migration' className='text-neutral-300 hover:text-white transition-colors'>Business Migration</Link></li>
-                  <li><Link href='/services/employment-matters' className='text-neutral-300 hover:text-white transition-colors'>Employment Matters</Link></li>
-                  <li><Link href='/services/housing-landlord-and-tenants' className='text-neutral-300 hover:text-white transition-colors'>Housing- Landlord & Tenants</Link></li>
-                  <li><Link href='/services/family-law' className='text-neutral-300 hover:text-white transition-colors'>Family Law</Link></li>
-                  <li><Link href='/services/wills-and-probate' className='text-neutral-300 hover:text-white transition-colors'>Wills & Probate</Link></li>
-                  <li><Link href='/services/document-legalisation' className='text-neutral-300 hover:text-white transition-colors'>Document Legalisation</Link></li>
-                  <li><Link href='/services/private-commercial-law' className='text-neutral-300 hover:text-white transition-colors'>Private Commercial Law</Link></li>
-                  <li><Link href='/services/charity-law' className='text-neutral-300 hover:text-white transition-colors'>Charity Law</Link></li>
+                  <li>
+                    <Link href='/services/immigration-law' className='text-neutral-300 hover:text-white transition-colors'>Immigration Lawx</Link>
+                    </li>
+                  <li>
+                    <Link href='/services/business-migration' className='text-neutral-300 hover:text-white transition-colors'>Business Migration</Link>
+                    </li>
+                  <li>
+                    <Link href='/services/employment-matters' className='text-neutral-300 hover:text-white transition-colors'>Employment Matters</Link>
+                    </li>
+                  <li>
+                    <Link href='/services/housing-landlord-and-tenants' className='text-neutral-300 hover:text-white transition-colors'>Housing- Landlord & Tenants</Link>
+                    </li>
+                  <li>
+                    <Link href='/services/family-law' className='text-neutral-300 hover:text-white transition-colors'>Family Law</Link>
+                    </li>
+                  <li>
+                    <Link href='/services/wills-and-probate' className='text-neutral-300 hover:text-white transition-colors'>Wills & Probate</Link>
+                    </li>
+                  <li>
+                    <Link href='/services/document-legalisation' className='text-neutral-300 hover:text-white transition-colors'>Document Legalisation</Link>
+                    </li>
+                  <li>
+                    <Link href='/services/private-commercial-law' className='text-neutral-300 hover:text-white transition-colors'>Private Commercial Law</Link>
+                  </li>
+                  <li>
+                    <Link href='/services/charity-law' className='text-neutral-300 hover:text-white transition-colors'>Charity Law</Link>
+                    </li>
                 </>
               )}
             </ul>
@@ -200,22 +209,22 @@ export default function Footer({ siteSettings, services }: FooterProps) {
             </p>
             <div className='flex space-x-6 mt-4 md:mt-0'>
               <Link
-                href='/privacy-policy'
+                href='/privacy-security'
                 className='text-neutral-300 hover:text-white text-sm transition-colors'
               >
-                Privacy Policy
+                Privacy & Security
               </Link>
               <Link
-                href='/terms'
+                href='/terms-conditions'
                 className='text-neutral-300 hover:text-white text-sm transition-colors'
               >
-                Terms of Service
+                Terms & Conditions
               </Link>
               <Link
-                href='/cookies'
+                href='/complaints-procedure'
                 className='text-neutral-300 hover:text-white text-sm transition-colors'
               >
-                Cookie Policy
+                Complaints Procedure
               </Link>
             </div>
           </div>
