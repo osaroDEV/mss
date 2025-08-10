@@ -15,6 +15,15 @@ export function urlFor(source: SanityImageSource) {
   return builder.image(source)
 }
 
+// Reusable SEO interface
+export interface SeoSettings {
+  metaTitle?: string
+  metaDescription?: string
+  keywords?: string[]
+  ogImage?: SanityImage
+  noIndex?: boolean
+}
+
 // Types for Sanity documents
 export interface SanityImage {
   asset: {
@@ -36,6 +45,7 @@ export interface Service {
   processSteps?: { step: number; title: string; description: string }[]
   featured: boolean
   order: number
+  seo?: SeoSettings // Added SEO to Service
 }
 
 export interface NavItem {
@@ -60,14 +70,15 @@ export interface ServiceInfo {
   servicePageDescription: string
 }
 
-export interface LegalNoticeItem { // Updated interface for legal notice objects
+export interface LegalNoticeItem { 
   title: string;
   image?: SanityImage;
   content?: any[]; // Added content for Portable Text
   externalUrl?: string; // Renamed from 'url' to clarify it's for external links
+  noIndex?: boolean // Added noIndex to legal notice item
 }
 
-export interface LegalNotices { // Updated LegalNotices interface
+export interface LegalNotices { 
   privacySecurity?: LegalNoticeItem;
   termsConditions?: LegalNoticeItem;
   complaintsProcedure?: LegalNoticeItem;
@@ -79,10 +90,22 @@ export interface HeaderSettings {
   contactInfo: ContactInfo
 }
 
-export interface PageContent {
-  _id: string
-  title: string
-  content: any[] // Portable Text
+export interface AboutPageData {
+  heroTitle: string
+  heroImage?: {
+    asset: {
+      _ref: string
+    }
+  }
+  whoWeAreTitle: string
+  whoWeAreContent: any[]
+  whatWeDoTitle: string
+  whatWeDoContent: any[]
+  ourLocationTitle: string
+  ourLocationContent: any[]
+  contactUsTitle: string
+  contactUsContent: any[]
+  seo?: SeoSettings // Added SEO to AboutPageData
 }
 
 export interface SiteSettings {
@@ -111,18 +134,21 @@ export interface SiteSettings {
     googleAnalyticsId?: string
     googleTagManagerId?: string
   }
-  seo?: {
-    metaTitle?: string
-    metaDescription?: string
-    keywords?: string[]
-    ogImage?: SanityImage
-    noIndex?: boolean
-  }
+  seo?: SeoSettings
 }
 
 // Function to get site settings
 export async function getSiteSettings(): Promise<SiteSettings | null> {
   const query = `*[_type == "siteSettings"][0]{
+  title,
+    logo{
+      asset,
+      alt
+    },
+    favicon{
+      asset,
+      alt
+    },
     contactInfo{
       phone,
       email,
@@ -141,19 +167,22 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
         title,
         image{asset,alt},
         content,
-        externalUrl
+        externalUrl,
+        noIndex // Fetch noIndex for legal notices
       },
       termsConditions{
         title,
         image{asset,alt},
         content,
-        externalUrl
+        externalUrl,
+        noIndex // Fetch noIndex for legal notices
       },
       complaintsProcedure{
         title,
         image{asset,alt},
         content,
-        externalUrl
+        externalUrl,
+        noIndex // Fetch noIndex for legal notices
       }
     },
     socialMedia{
@@ -194,7 +223,7 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
   }
 }
 
-// lib/sanity.ts
+// Function to get all services (for footer/services list)
 export async function getServicesData(): Promise<Service[]> {
   const query = `*[_type == "service"] | order(order asc, title asc) {
     _id,

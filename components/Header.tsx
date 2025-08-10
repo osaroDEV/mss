@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Phone, Mail } from 'lucide-react'
 import Image from "next/image"
-import { getSiteSettings } from "@/lib/sanity"
+import { getSiteSettings, urlFor } from "@/lib/sanity"
 import MobileMenu from "./MobileMenu" // Import the new MobileMenu Client Component
 
 export default async function Header() {
@@ -15,6 +15,7 @@ export default async function Header() {
     { name: "Contact", href: "/contact", external: false },
   ]
   let siteTitle = "Michael Stevens Solicitors"
+  let siteLogoUrl: string | null = null
 
   // Check if site settings and required contact info are available
   if (
@@ -45,6 +46,10 @@ export default async function Header() {
       external: item.external,
     }))
   }
+  if (siteSettings.logo) {
+    siteLogoUrl = urlFor(siteSettings.logo).url()
+  }
+  
 
   return (
     <header className="bg-white shadow-sm border-b border-neutral-200">
@@ -74,8 +79,7 @@ export default async function Header() {
         <div className="flex justify-between items-center py-4">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link href="/" className="flex items-center">
-              {/* <div className="text-2xl font-bold text-primary-800">{siteTitle}</div> */}
-              <Image src={'/images/5.svg'} alt='Michael Stevens Solicitors Logo' width={400} height={80} className='' />
+              <Image src={siteLogoUrl || "/placeholder.svg"} alt='Michael Stevens Solicitors Logo' width={400} height={80} className='' />
             </Link>
           </div>
           {/* Desktop navigation */}

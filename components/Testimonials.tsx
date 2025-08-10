@@ -61,14 +61,7 @@ export default async function Testimonials() {
           {/* TrustPilot Widget */}
           <div className="flex flex-col items-center justify-center space-y-4 mb-12">
             <Link href={trustPilotProfileLink} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center">
-              {/* Trustpilot Logo */}
-              <Image
-                src="/placeholder.svg?height=30&width=120"
-                alt="Trustpilot"
-                width={120}
-                height={30}
-                className="mb-2"
-              />
+              <h2 className='mb-2.5'>Trustpilot</h2>
               {/* Star Rating */}
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
