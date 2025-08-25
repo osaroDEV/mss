@@ -1,9 +1,10 @@
+"use client"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
-import ContactForm from "@/components/ContactFormAbout" 
+import ContactForm from "@/components/ContactFormAbout"
 import { client, urlFor } from "@/lib/sanity"
 import PortableTextRenderer from "@/components/PortableTextRenderer"
-import Link from "next/link"
+import { useState, useEffect } from "react"
 
 // Define a type for the fetched data
 interface AboutPageData {
@@ -45,12 +46,45 @@ async function getAboutPageData(): Promise<AboutPageData | null> {
   }
 }
 
-export default async function AboutPage() {
-  const data = await getAboutPageData()
+export default function AboutPage() {
+  const [data, setData] = useState<AboutPageData | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [imageLoaded, setImageLoaded] = useState(false)
 
-  if (!data) {
-    // Handle case where data is not available, e.g., show a loading state or error message
-    return <div className="min-h-screen flex items-center justify-center">Loading or no data available...</div>
+  // Fetch data on component mount
+  useEffect(() => {
+    async function fetchData() {
+      const aboutData = await getAboutPageData()
+      setData(aboutData)
+      setIsLoading(false)
+    }
+    fetchData()
+  }, [])
+
+  if (isLoading || !data) {
+    return (
+      <div className="min-h-screen">
+        {/* Loading skeleton for hero section */}
+        <section className="relative h-screen">
+          <div className="hidden lg:flex h-full">
+            <div className="w-1/2 bg-slate-900 flex items-center justify-center">
+              <div className="animate-pulse bg-slate-800 h-16 w-96 rounded"></div>
+            </div>
+            <div className="w-1/2 bg-gray-200 animate-pulse relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 animate-shimmer"></div>
+            </div>
+          </div>
+          <div className="lg:hidden h-full flex flex-col">
+            <div className="flex-1 bg-gray-200 animate-pulse relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 animate-shimmer"></div>
+            </div>
+            <div className="bg-slate-900 py-12 px-6">
+              <div className="animate-pulse bg-slate-800 h-12 w-64 mx-auto rounded"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    )
   }
 
   const heroImageUrl = data.heroImage ? urlFor(data.heroImage).url() : "/placeholder.svg?height=1080&width=1920"
@@ -63,36 +97,64 @@ export default async function AboutPage() {
         <div className="hidden lg:flex h-full">
           {/* Left Side - About Us Text */}
           <div className="w-1/2 bg-slate-900 flex items-center justify-center">
-            <h1 className="text-6xl xl:text-7xl font-light text-white">{data.heroTitle}</h1>
+            <h1 className="text-6xl xl:text-7xl font-light text-white animate-fade-in-up">{data.heroTitle}</h1>
           </div>
           {/* Right Side - Image with Left Blur */}
           <div className="w-1/2 relative overflow-hidden">
+            {/* Loading placeholder with shimmer effect */}
+            {!imageLoaded && (
+              <div className="absolute inset-0 bg-gray-200 flex items-center justify-center z-10">
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 animate-shimmer"></div>
+                <div className="relative z-10 text-gray-500 font-medium"></div>
+              </div>
+            )}
             <Image
               src={heroImageUrl || "/placeholder.svg"}
               alt={data.heroTitle || "About Us Hero"}
               fill
-              className="object-cover"
+              className={`object-cover transition-opacity duration-500 ease-out ${
+                imageLoaded ? "opacity-100" : "opacity-0"
+              }`}
               priority
+              onLoad={() => setImageLoaded(true)}
+              onError={() => setImageLoaded(true)}
             />
             {/* Left blur gradient */}
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/60 via-transparent to-transparent" />
+            <div
+              className={`absolute inset-0 bg-gradient-to-r from-slate-900/60 via-transparent to-transparent transition-opacity duration-500 delay-300 ${
+                imageLoaded ? "opacity-100" : "opacity-0"
+              }`}
+            />
           </div>
         </div>
         {/* Mobile Layout - Stacked */}
         <div className="lg:hidden h-full flex flex-col">
           {/* Top - Image (no blur on mobile) */}
           <div className="flex-1 relative">
+            {/* Loading placeholder for mobile */}
+            {!imageLoaded && (
+              <div className="absolute inset-0 bg-gray-200 flex items-center justify-center z-10">
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 animate-shimmer"></div>
+                <div className="relative z-10 text-gray-500 font-medium">Loading image...</div>
+              </div>
+            )}
             <Image
               src={heroImageUrl || "/placeholder.svg"}
               alt={data.heroTitle || "About Us Hero"}
               fill
-              className="object-cover"
+              className={`object-cover transition-opacity duration-500 ease-out ${
+                imageLoaded ? "opacity-100" : "opacity-0"
+              }`}
               priority
+              onLoad={() => setImageLoaded(true)}
+              onError={() => setImageLoaded(true)}
             />
           </div>
           {/* Bottom - About Us Text */}
           <div className="bg-slate-900 py-12 px-6">
-            <h1 className="text-4xl sm:text-5xl font-light text-white text-center">{data.heroTitle}</h1>
+            <h1 className="text-4xl sm:text-5xl font-light text-white text-center animate-fade-in-up">
+              {data.heroTitle}
+            </h1>
           </div>
         </div>
       </section>
@@ -103,30 +165,32 @@ export default async function AboutPage() {
             {/* Left Column - Content */}
             <div className="lg:col-span-2 space-y-12">
               {/* Who We Are Section */}
-              <div>
+              <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">{data.whoWeAreTitle}</h2>
                 <PortableTextRenderer content={data.whoWeAreContent} />
               </div>
               {/* What We Do Section */}
-              <div>
+              <div className="animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">{data.whatWeDoTitle}</h2>
                 <PortableTextRenderer content={data.whatWeDoContent} />
               </div>
               {/* Our Location */}
-              <div>
+              <div className="animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
                 <h3 className="text-3xl font-bold text-gray-900 mb-6">{data.ourLocationTitle}</h3>
                 <PortableTextRenderer content={data.ourLocationContent} />
               </div>
               {/* Contact Us */}
-              <div>
+              <div className="animate-fade-in-up" style={{ animationDelay: "0.8s" }}>
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">{data.contactUsTitle}</h2>
                 <PortableTextRenderer content={data.contactUsContent} />
               </div>
-              
             </div>
             {/* Right Column - Contact Form */}
             <div className="lg:col-span-1">
-              <Card className="bg-slate-800 text-white border-0 sticky top-8">
+              <Card
+                className="bg-slate-800 text-white border-0 sticky top-8 animate-fade-in-up"
+                style={{ animationDelay: "0.3s" }}
+              >
                 <CardContent className="p-8">
                   <div className="mb-6">
                     <h3 className="text-2xl font-bold mb-2">Contact us today</h3>
