@@ -1,10 +1,5 @@
-"use client"
-import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
-import ContactForm from "@/components/ContactFormAbout"
 import { client, urlFor } from "@/lib/sanity"
-import PortableTextRenderer from "@/components/PortableTextRenderer"
-import { useState, useEffect } from "react"
+import AboutPageClient from "@/components/AboutPageClient"
 
 // Define a type for the fetched data
 interface AboutPageData {
@@ -37,49 +32,52 @@ async function getAboutPageData(): Promise<AboutPageData | null> {
     contactUsTitle,
     contactUsContent
   }`
+
   try {
-    const data = await client.fetch(query)
+    console.log("Fetching about page data from Sanity...")
+    const data = await client.fetch(
+      query,
+      {},
+      {
+        cache: "no-store", // Ensure fresh data in production
+        next: { revalidate: 0 }, // Disable caching for debugging
+      },
+    )
+    console.log("About page data received:", data ? "Success" : "No data")
     return data
   } catch (error) {
-    console.error("Failed to fetch about page data from Sanity:", error)
+    console.error("Error fetching about page data:", error)
     return null
   }
 }
 
-export default function AboutPage() {
-  const [data, setData] = useState<AboutPageData | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [imageLoaded, setImageLoaded] = useState(false)
+export default async function AboutPage() {
+  const data = await getAboutPageData()
 
-  // Fetch data on component mount
-  useEffect(() => {
-    async function fetchData() {
-      const aboutData = await getAboutPageData()
-      setData(aboutData)
-      setIsLoading(false)
-    }
-    fetchData()
-  }, [])
+  // Debug logging
+  console.log("About page render - Data available:", !!data)
+  console.log("About page render - Hero title:", data?.heroTitle)
+  console.log("About page render - Has hero image:", !!data?.heroImage)
 
-  if (isLoading || !data) {
+  if (!data) {
+    // Show error state instead of loading state
     return (
       <div className="min-h-screen">
-        {/* Loading skeleton for hero section */}
-        <section className="relative h-screen">
-          <div className="hidden lg:flex h-full">
-            <div className="w-1/2 bg-slate-900 flex items-center justify-center">
-              <div className="animate-pulse bg-slate-800 h-16 w-96 rounded"></div>
-            </div>
-            <div className="w-1/2 bg-gray-200 animate-pulse relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 animate-shimmer"></div>
-            </div>
-          </div>
-          <div className="lg:hidden h-full flex flex-col">
-            <div className="flex-1 bg-gray-200 animate-pulse relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 animate-shimmer"></div>
-            </div>
-            <div className="bg-slate-900 py-12 px-6">
-              <div className="animate-pulse bg-slate-800 h-12 w-64 mx-auto rounded"></div>
+        <section className="py-16 lg:py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <h2 className="text-3xl md:text-4xl font-bold text-red-600 mb-6">No About Page Data Found</h2>
+              <p className="text-lg text-neutral-600 mb-4">
+                Please create an "About Page" document in Sanity Studio to see content here.
+              </p>
+              <div className="mt-8 p-6 bg-neutral-100 rounded-lg">
+                <p className="text-sm text-neutral-500">
+                  Debug: No data returned from Sanity query for 'aboutPage' document type.
+                </p>
+                <p className="text-sm text-neutral-500 mt-2">
+                  Check your Sanity configuration and ensure the document exists.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -89,120 +87,6 @@ export default function AboutPage() {
 
   const heroImageUrl = data.heroImage ? urlFor(data.heroImage).url() : "/placeholder.svg?height=1080&width=1920"
 
-  return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-screen">
-        {/* Desktop Layout - Two Column */}
-        <div className="hidden lg:flex h-full">
-          {/* Left Side - About Us Text */}
-          <div className="w-1/2 bg-slate-900 flex items-center justify-center">
-            <h1 className="text-6xl xl:text-7xl font-light text-white animate-fade-in-up">{data.heroTitle}</h1>
-          </div>
-          {/* Right Side - Image with Left Blur */}
-          <div className="w-1/2 relative overflow-hidden">
-            {/* Loading placeholder with shimmer effect */}
-            {!imageLoaded && (
-              <div className="absolute inset-0 bg-gray-200 flex items-center justify-center z-10">
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 animate-shimmer"></div>
-                <div className="relative z-10 text-gray-500 font-medium"></div>
-              </div>
-            )}
-            <Image
-              src={heroImageUrl || "/placeholder.svg"}
-              alt={data.heroTitle || "About Us Hero"}
-              fill
-              className={`object-cover transition-opacity duration-500 ease-out ${
-                imageLoaded ? "opacity-100" : "opacity-0"
-              }`}
-              priority
-              onLoad={() => setImageLoaded(true)}
-              onError={() => setImageLoaded(true)}
-            />
-            {/* Left blur gradient */}
-            <div
-              className={`absolute inset-0 bg-gradient-to-r from-slate-900/60 via-transparent to-transparent transition-opacity duration-500 delay-300 ${
-                imageLoaded ? "opacity-100" : "opacity-0"
-              }`}
-            />
-          </div>
-        </div>
-        {/* Mobile Layout - Stacked */}
-        <div className="lg:hidden h-full flex flex-col">
-          {/* Top - Image (no blur on mobile) */}
-          <div className="flex-1 relative">
-            {/* Loading placeholder for mobile */}
-            {!imageLoaded && (
-              <div className="absolute inset-0 bg-gray-200 flex items-center justify-center z-10">
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 animate-shimmer"></div>
-                <div className="relative z-10 text-gray-500 font-medium">Loading image...</div>
-              </div>
-            )}
-            <Image
-              src={heroImageUrl || "/placeholder.svg"}
-              alt={data.heroTitle || "About Us Hero"}
-              fill
-              className={`object-cover transition-opacity duration-500 ease-out ${
-                imageLoaded ? "opacity-100" : "opacity-0"
-              }`}
-              priority
-              onLoad={() => setImageLoaded(true)}
-              onError={() => setImageLoaded(true)}
-            />
-          </div>
-          {/* Bottom - About Us Text */}
-          <div className="bg-slate-900 py-12 px-6">
-            <h1 className="text-4xl sm:text-5xl font-light text-white text-center animate-fade-in-up">
-              {data.heroTitle}
-            </h1>
-          </div>
-        </div>
-      </section>
-      {/* Main Content Section - Two Column Layout */}
-      <section className="py-16 bg-white px-2 md:px-10 border">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
-            {/* Left Column - Content */}
-            <div className="lg:col-span-2 space-y-12">
-              {/* Who We Are Section */}
-              <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">{data.whoWeAreTitle}</h2>
-                <PortableTextRenderer content={data.whoWeAreContent} />
-              </div>
-              {/* What We Do Section */}
-              <div className="animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">{data.whatWeDoTitle}</h2>
-                <PortableTextRenderer content={data.whatWeDoContent} />
-              </div>
-              {/* Our Location */}
-              <div className="animate-fade-in-up" style={{ animationDelay: "0.6s" }}>
-                <h3 className="text-3xl font-bold text-gray-900 mb-6">{data.ourLocationTitle}</h3>
-                <PortableTextRenderer content={data.ourLocationContent} />
-              </div>
-              {/* Contact Us */}
-              <div className="animate-fade-in-up" style={{ animationDelay: "0.8s" }}>
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">{data.contactUsTitle}</h2>
-                <PortableTextRenderer content={data.contactUsContent} />
-              </div>
-            </div>
-            {/* Right Column - Contact Form */}
-            <div className="lg:col-span-1">
-              <Card
-                className="bg-slate-800 text-white border-0 sticky top-8 animate-fade-in-up"
-                style={{ animationDelay: "0.3s" }}
-              >
-                <CardContent className="p-8">
-                  <div className="mb-6">
-                    <h3 className="text-2xl font-bold mb-2">Contact us today</h3>
-                    <p className="text-slate-300">To find out more</p>
-                  </div>
-                  <ContactForm />
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  )
+  // Pass data to client component for animations
+  return <AboutPageClient data={data} heroImageUrl={heroImageUrl} />
 }
