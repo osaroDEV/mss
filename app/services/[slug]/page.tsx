@@ -415,7 +415,7 @@ export default async function ServicePage({
                   Need Expert Advice?
                 </h3>
                 <p className='text-neutral-600 mb-4'>
-                  Contact our experienced team for a consultation about your{' '}
+                  Contact our experienced team of solicitors for a consultation about your{' '}
                   {service.title.toLowerCase()} needs.
                 </p>
                 <Link
