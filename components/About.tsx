@@ -72,8 +72,8 @@ function getIconComponent(iconName: string) {
 }
 
 async function getAboutPageData(): Promise<AboutPageData | null> {
-  const query = `*[_type == "about"][0]{
-    mainTitle,
+  const query = `*[_type == "aboutPage"][0]{
+    heroTitle,
     heroImage,
     whoWeAreTitle,
     whoWeAreContent,
@@ -82,19 +82,13 @@ async function getAboutPageData(): Promise<AboutPageData | null> {
     ourLocationTitle,
     ourLocationContent,
     contactUsTitle,
-    contactUsContent,
-    achievements[]{
-      title,
-      description,
-      icon
-    },
+    contactUsContent
   }`
   try {
     const data = await client.fetch(query)
-    console.log("Raw Sanity data:", JSON.stringify(data, null, 2))
-    return data || null
+    return data
   } catch (error) {
-    console.error("Error fetching about page data:", error)
+    console.error("Failed to fetch about page data from Sanity:", error)
     return null
   }
 }
