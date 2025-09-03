@@ -9,6 +9,9 @@ const nextConfig = {
     domains: ['cdn.sanity.io']
   },
   trailingSlash: true,
+  compress: true,
+  poweredByHeader: false,
+  generateEtags: false,
 }
 
 module.exports = nextConfig

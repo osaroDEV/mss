@@ -3,7 +3,26 @@ import { Card, CardContent } from "@/components/ui/card"
 import ContactForm from "@/components/ContactFormAbout" 
 import { client, urlFor } from "@/lib/sanity"
 import PortableTextRenderer from "@/components/PortableTextRenderer"
-import Link from "next/link"
+import { getSiteSettings } from '@/lib/sanity';
+
+export async function generateMetadata() {
+  const data = await getAboutPageData()
+  const siteSettings = await getSiteSettings()
+  
+  return {
+    title: data?.heroTitle || "About Us",
+    description: "Learn about Michael Stevens Solicitors, our history, values, and commitment to providing exceptional legal services.",
+    openGraph: {
+      title: data?.heroTitle || "About Us",
+      description: "Learn about Michael Stevens Solicitors, our history, values, and commitment to providing exceptional legal services.",
+      url: '/about',
+      type: 'website',
+    },
+    alternates: {
+      canonical: '/about',
+    },
+  }
+}
 
 // Define a type for the fetched data
 interface AboutPageData {

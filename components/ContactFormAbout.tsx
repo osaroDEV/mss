@@ -44,7 +44,8 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form action="https://formsubmit.co/info@michaelstevenssolicitors.com" 
+    method='POST' className="space-y-6">
       <div>
         <Label htmlFor="name" className="text-white mb-2 block">
           Your name*
@@ -106,14 +107,17 @@ export default function ContactForm() {
           className="w-full px-4 py-3 bg-white text-gray-900 border-0 rounded-md focus:ring-2 focus:ring-orange-500 transition-colors font-sans"
         >
           <option value="">Enquiry type</option>
-          <option value="personal">Personal Legal Advice</option>
-          <option value="business">Business Legal Advice</option>
-          <option value="property">Property Law</option>
-          <option value="family">Family Law</option>
-          <option value="immigration">Immigration Law</option>
-          <option value="employment">Employment Matters</option>
-          <option value="wills-probate">Wills and Probate</option>
-          <option value="other">Other</option>
+          <option value="immigration-law">Immigration Law</option>
+            <option value="business-migration">Business Migration</option>
+            <option value="employment-law">Employment Law</option>
+            <option value="family-law">Family Law</option>
+            <option value="housing-landlord-tenenants">Housing Landlord and Tenants</option>
+            <option value="wills-probate">Wills and Probate</option>
+            <option value="document-legalisation">Document Legalisation</option>
+            <option value="private-commercial-law">Private Commercial Law</option>
+            <option value="charity-law">Charity Law</option>
+            <option value="citizenship-by-investment">Citizenship-by-Investment</option>
+            <option value="property-law">Property Law</option>
         </select>
       </div>
 

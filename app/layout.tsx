@@ -4,6 +4,7 @@ import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import GoogleAnalytics from "@/components/GoogleAnalytics"
 import { getSiteSettings, getServicesData, urlFor } from "@/lib/sanity"
+import StructuredData from "@/components/StructuredData"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -27,12 +28,24 @@ export async function generateMetadata() {
     : null // Standard size for Open Graph images
 
   // Default robots content for the entire site. Individual pages can override this.
-  const robotsContent = "index, follow"
+  const robotsContent = siteSettings?.seo?.noIndex ? "noindex, nofollow" : "index, follow"
 
   return {
-   title: metadataTitle,
+    title: {
+      default: metadataTitle,
+      template: `%s | ${siteSettings?.title || "Michael Stevens Solicitors"}`
+    },
     description: metadataDescription,
     keywords: metadataKeywords,
+    authors: [{ name: siteSettings?.title || "Michael Stevens Solicitors" }],
+    creator: siteSettings?.title || "Michael Stevens Solicitors",
+    publisher: siteSettings?.title || "Michael Stevens Solicitors",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://michaelstevenssolicitors.com'),
     icons: {
       icon: metadataFavicon,
       shortcut: metadataFavicon,
@@ -42,10 +55,21 @@ export async function generateMetadata() {
     openGraph: {
       title: metadataTitle,
       description: metadataDescription,
+      url: '/',
+      siteName: siteSettings?.title || "Michael Stevens Solicitors",
       images: metadataOgImage ? [metadataOgImage] : [],
       type: "website",
+      locale: 'en_GB',
     },
-      icon: siteSettings?.favicon || "/favicon.ico",
+    twitter: {
+      card: 'summary_large_image',
+      title: metadataTitle,
+      description: metadataDescription,
+      images: metadataOgImage ? [metadataOgImage] : [],
+    },
+    alternates: {
+      canonical: '/',
+    },
   }
 }
 
@@ -60,6 +84,11 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 
   return (
     <html lang="en">
+      <head>
+        <link rel="canonical" href={process.env.NEXT_PUBLIC_SITE_URL || 'https://michaelstevenssolicitors.com'} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#1e3a5f" />
+      </head>
       <body className={inter.className}>
         {/* Removed siteSettings prop from Header */}
         {googleTagManagerId && (
@@ -72,6 +101,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             ></iframe>
           </noscript>
         )}
+        <StructuredData siteSettings={siteSettings} services={services} />
         <Header />
         <main>{children}</main>
         <Footer siteSettings={siteSettings} services={services} />

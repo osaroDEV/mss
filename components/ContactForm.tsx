@@ -42,9 +42,8 @@ export default function ContactForm() {
 
   return (
     <form 
-    action="https://formsubmit.co/osernon@gmail.com" 
+    action="https://formsubmit.co/info@michaelstevenssolicitors.com" 
     method='POST'
-    // onSubmit={handleSubmit} 
     className="space-y-6"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -112,11 +111,15 @@ export default function ContactForm() {
             <option value="">Select a subject</option>
             <option value="immigration-law">Immigration Law</option>
             <option value="business-migration">Business Migration</option>
-            <option value="employment-matters">Employment Matters</option>
+            <option value="employment-law">Employment Law</option>
             <option value="family-law">Family Law</option>
             <option value="housing-landlord-tenenants">Housing Landlord and Tenants</option>
             <option value="wills-probate">Wills and Probate</option>
-            <option value="other">Other</option>
+            <option value="document-legalisation">Document Legalisation</option>
+            <option value="private-commercial-law">Private Commercial Law</option>
+            <option value="charity-law">Charity Law</option>
+            <option value="citizenship-by-investment">Citizenship-by-Investment</option>
+            <option value="property-law">Property Law</option>
           </select>
         </div>
       </div>
