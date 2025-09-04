@@ -17,7 +17,7 @@ export default function StructuredData({ siteSettings, services }: StructuredDat
     "@type": "LegalService",
     "name": siteSettings.title || "Michael Stevens Solicitors",
     "description": siteSettings.description || "Professional legal services",
-    "url": process.env.NEXT_PUBLIC_SITE_URL || "https://michaelstevenssolicitors.com",
+    "url": process.env.NEXT_PUBLIC_SITE_URL,
     "logo": siteSettings.logo ? `${process.env.NEXT_PUBLIC_SITE_URL}/api/og?logo=${siteSettings.logo.asset._ref}` : null,
     "image": siteSettings.seo?.ogImage ? `${process.env.NEXT_PUBLIC_SITE_URL}/api/og?image=${siteSettings.seo.ogImage.asset._ref}` : null,
     "telephone": contactInfo?.phone,

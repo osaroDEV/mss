@@ -3,8 +3,8 @@ import imageUrlBuilder from "@sanity/image-url"
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
 
 export const client = createClient({
-  projectId: '79kq4upu',
-  dataset: 'production',
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   useCdn: false, // This is key - set to false for latest content
   apiVersion: '2025-08-05', // Use current date for API version
 })

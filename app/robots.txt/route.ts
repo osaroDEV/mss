@@ -3,7 +3,7 @@ import { getSiteSettings } from '@/lib/sanity'
 
 export async function GET() {
   const siteSettings = await getSiteSettings()
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://michaelstevenssolicitors.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
   
   // Check if site should be indexed
   const shouldIndex = !siteSettings?.seo?.noIndex
