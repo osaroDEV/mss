@@ -5,6 +5,8 @@ import Footer from "@/components/Footer"
 import GoogleAnalytics from "@/components/GoogleAnalytics"
 import { getSiteSettings, getServicesData, urlFor } from "@/lib/sanity"
 import StructuredData from "@/components/StructuredData"
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -106,6 +108,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <main>{children}</main>
         <Footer siteSettings={siteSettings} services={services} />
         <GoogleAnalytics googleAnalyticsId={googleAnalyticsId} googleTagManagerId={googleTagManagerId} />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
