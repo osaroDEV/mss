@@ -276,7 +276,7 @@ export default async function ServicePage({
           </nav>
 
           {/* Hero Content */}
-          <div className='max-w-4xl'>
+          <div className=''>
             <h1 className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white font-bold leading-tight mb-6'>
               {service.title}
             </h1>

@@ -69,7 +69,7 @@ export default async function Hero() {
           <div className="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32">
             {/* Content */}
             <div className="animate-fade-in">
-              <h1 className="text-2xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">{data.mainHeading}</h1>
+              <h1 className="text-2xl md:text-4xl font-bold leading-tight mb-6">{data.mainHeading}</h1>
               <p className="md:text-xl text-neutral-200 mb-8 leading-relaxed">{data.paragraph1}</p>
               <p className="md:text-xl text-neutral-200 mb-8 leading-relaxed">{data.paragraph2}</p>
             </div>
