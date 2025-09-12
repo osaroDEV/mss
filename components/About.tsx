@@ -170,7 +170,6 @@ export default async function About() {
                   rel='noopener noreferrer'
                   className='font-medium hover:text-[rgba(0,0,0,0.5)]  transition-colors block mb-1'
                 >
-                  Information Commissioner's Office
                 </Link>
               </div>
             </div>
@@ -198,7 +197,6 @@ export default async function About() {
                   rel='noopener noreferrer'
                   className='font-medium hover:text-[rgba(0,0,0,0.5)] transition-colors block mb-1'
                 >
-                  The Law Society
                 </Link>
               </div>
             </div>
