@@ -69,9 +69,9 @@ export default function Footer({ siteSettings, services }: FooterProps) {
                 </>
               )}
             </ul>
+          </div>
             {/* SRA */}
             <SRADigitalBadge className="mt-6" />
-          </div>
 
           {/* Practice Areas */}
           <div className='flex-1'>
