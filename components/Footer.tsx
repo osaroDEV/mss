@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, Mail, MapPin, Clock, Linkedin } from 'lucide-react';
 import { type SiteSettings, type Service } from '@/lib/sanity'; // Import Service type
+import SRADigitalBadge from './SRADigitalBadge';
 
 interface FooterProps {
   siteSettings?: SiteSettings | null;
@@ -69,23 +70,7 @@ export default function Footer({ siteSettings, services }: FooterProps) {
               )}
             </ul>
             {/* SRA */}
-            <div className='border mt-5 w-[200px]'>
-              <h3 className='text-lg font-semibold mb-4'>SRA Regulated</h3>
-              <Link
-                href={REGULATORY_BODIES.sra.url}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='block hover:opacity-80 transition-opacity mb-3'
-              >
-                <Image
-                  src={REGULATORY_BODIES.sra.logoUrl || "/placeholder.svg"}
-                  alt='SRA Logo'
-                  width={120}
-                  height={50}
-                  className='object-contain'
-                />
-              </Link>
-            </div>
+            <SRADigitalBadge className="mt-6" />
           </div>
 
           {/* Practice Areas */}

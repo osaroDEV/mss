@@ -1,27 +1,45 @@
-import Image from 'next/image';
+import React from 'react';
 
 interface SRADigitalBadgeProps {
+  /**
+   * Maximum width of the badge container
+   * @default "275px"
+   */
+  maxWidth?: string;
+  /**
+   * Maximum height of the badge container  
+   * @default "163px"
+   */
+  maxHeight?: string;
+  /**
+   * Custom CSS classes for the outer container
+   */
   className?: string;
-  badgeUrl?: string; // URL to the SRA badge image
-  alt?: string;
 }
 
-export default function SRADigitalBadge({
-  className = '',
-  badgeUrl = 'https://cdn.yoshki.com/iframe/55845r.html', // Default path to your SRA badge image
-  alt = 'SRA Digital Badge - Solicitors Regulation Authority',
-}: SRADigitalBadgeProps) {
+const SRADigitalBadge: React.FC<SRADigitalBadgeProps> = ({
+  maxWidth = "275px",
+  maxHeight = "163px", 
+  className = ""
+}) => {
   return (
-    <div className={`max-w-[275px] max-h-[163px] ${className}`}>
-      <div className='relative pb-[59.1%] h-auto overflow-hidden'>
-        <Image
-          src={badgeUrl}
-          alt={alt}
-          fill
-          className='object-contain'
-          sizes='(max-width: 275px) 100vw, 275px'
+    <div 
+      className={`inline-block ${className}`}
+      style={{ maxWidth, maxHeight }}
+    >
+      {/* Responsive container with 59.1% aspect ratio */}
+      <div className="relative w-full h-0 overflow-hidden" style={{ paddingBottom: '59.1%' }}>
+        <iframe
+          className="absolute top-0 left-0 w-full h-full border-0 m-0 p-0 bg-transparent"
+          frameBorder="0"
+          scrolling="no"
+          allowTransparency={true}
+          src="https://cdn.yoshki.com/iframe/55845r.html"
+          title="SRA Digital Badge"
         />
       </div>
     </div>
   );
-}
+};
+
+export default SRADigitalBadge;
