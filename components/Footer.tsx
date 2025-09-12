@@ -183,6 +183,9 @@ export default function Footer({ siteSettings, services }: FooterProps) {
                     </>
                   )}
                 </div>
+                <div className="mt-6">
+    <SRADigitalBadge />
+  </div>
               </div>
             </div>
           </div>
