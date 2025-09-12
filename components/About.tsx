@@ -145,7 +145,8 @@ export default async function About() {
           </h3>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8 text-sm'>
             {/* SRA */}
-            <SRADigitalBadge className="mt-2" />
+            <SRADigitalBadge />
+            <SRADigitalBadge />
 
             {/* ICO */}
             <div className='flex flex-col items-center text-center'>
