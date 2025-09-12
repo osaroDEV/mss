@@ -146,7 +146,6 @@ export default async function About() {
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8 text-sm'>
             {/* SRA */}
             <SRADigitalBadge />
-            <SRADigitalBadge />
 
             {/* ICO */}
             <div className='flex flex-col items-center text-center'>
