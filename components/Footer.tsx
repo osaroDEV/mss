@@ -9,18 +9,11 @@ interface FooterProps {
   services?: Service[]; // Add services prop
 }
 
-// Regulatory bodies configuration
 const REGULATORY_BODIES = {
-  sra: {
-    name: 'Solicitors Regulation Authority',
-    url: 'https://www.sra.org.uk/consumers/register/organisation/?sraNumber=625253&prevSearchText=michael%20stevens%20solicitors&prevSearchFilter=',
-    logoUrl: '/images/sra-logo-white.png', // Use white version for dark footer
-    number: '[Your SRA Number]',
-  },
   ico: {
     name: "Information Commissioner's Office",
     url: 'https://ico.org.uk/ESDWebPages/Entry/ZA050265',
-    logoUrl: '/images/ico-white.jpg', // Use white version for dark footer
+    logoUrl: '/images/ico-blue.jpg', // Use white version for dark footer
     number: '[Your ICO Number]',
   },
   lawSociety: {
@@ -69,9 +62,7 @@ export default function Footer({ siteSettings, services }: FooterProps) {
                 </>
               )}
             </ul>
-            <div className="mt-6">
-              <SRADigitalBadge />
-            </div>
+            
           </div>
 
           {/* Practice Areas */}
@@ -183,10 +174,15 @@ export default function Footer({ siteSettings, services }: FooterProps) {
                     </>
                   )}
                 </div>
-                <div className="mt-6">
-    <SRADigitalBadge />
-  </div>
               </div>
+              <div className='grid grid-cols-1 gap-8 text-sm'>
+            {/* SRA */}
+            <SRADigitalBadge />
+
+            
+
+           
+          </div>
             </div>
           </div>
         </div>
